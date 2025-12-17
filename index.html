@@ -3,31 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MAgosBrger</title>
+    <title>MAgosBurger</title>
+    <link rel="stylesheet" href="estilos/styles.css">
   </head>
   <body>
     <header>
+      <h1 class="logo">MAgosBURGER — 
+        magia de verdade em cada mordida. ✨🍔</h1>
       <nav>
-        <ul>
-          <li><a href="#">Entrar ou Cadastrar</a></li>
-          <li><a href="#">Cupons</a></li>
-          <li><a href="#">Carrinho</a></li>
+      
+        <ul class="menu">
+          <li class="menu-entra"><a href="#">Entrar ou Cadastrar</a></li>
+          <li class="menu-cupom "><a href="#">Cupons</a></li>
+          <li class="menu-carrinho"><a href="#">Carrinho</a></li>
         </ul>
-        <ul>
-          <li><a href="#">Menu Hamburguer</a></li>
+        <ul class="menu-hamburguer">
+          <li><a href="outra_pagina.html" class="menu-hamburguer">
+  <span></span>
+  <span></span>
+  <span></span>
+</a></li>
         </ul>
       </nav>
     </header>
     <main>
       <form>
         <label for="menu-toggle" class="menu-icon"> CATEGORIAS > </label>
-
+         
         <!-- MENU -->
-        <nav class="menu">
+        <nav class="menu-2">
           <a href="#classico">Hambúrguer Clássico</a>
           <a href="#premium">Hambúrguer Premium</a>
           <a href="#x">Hambúrguer X</a>
-          <a href="#natural">Hambúrguer Natural</a>
+          <a href="#vegano">Hambúrguer Vegano</a>
           <a href="#porcoes">Porções</a>
           <a href="#bebidas">Bebidas</a>
           <a href="#sobremesas">Sobremesas</a>
@@ -89,7 +97,7 @@
         </div>
       </section>
 
-      <section id="premium" >
+      <section id="premium">
         <h1>Hambúrguer Premium</h1>
         <div class="CHEESE">
           <h2>CHEESE</h2>
@@ -105,9 +113,9 @@
             <li>- Cebola Caramelizada</li>
           </ul>
           <p>Preço: R$ 25,00</p>
-          <img src="/imgs/6.jpg" alt="">
+          <img src="/imgs/6.jpg" alt="" />
           <button>Adicionar ao Carrinho</button>
-        </div>  
+        </div>
         <div class="FABULOUS">
           <h2>FABULOUS</h2>
           <ul>
@@ -120,10 +128,10 @@
             <li>- Cebola Crispy</li>
           </ul>
           <p>Preço: R$ 25,00</p>
-          <img src="/imgs/8.jpg" alt="">
+          <img src="/imgs/8.jpg" alt="" />
           <button>Adicionar ao Carrinho</button>
         </div>
-        <div class="GORGONZOL"> 
+        <div class="GORGONZOL">
           <h2>GORGONZOL</h2>
           <ul>
             <li>- Pão Brioche</li>
@@ -134,16 +142,16 @@
             <li>- Rúcula</li>
             <li>- Tomate Seco</li>
             <li>- Cebola Caramelizada</li>
-            <li>- Cebola Crispy</li>    
+            <li>- Cebola Crispy</li>
           </ul>
           <p>Preço: R$ 25,00</p>
-          <img src="/imgs/9.jpg" alt="">
+          <img src="/imgs/9.jpg" alt="" />
           <button>Adicionar ao Carrinho</button>
         </div>
 
-    <div class="AMERICAN">  
-        <h2>AMERICAN</h2>
-        <ul>
+        <div class="AMERICAN">
+          <h2>AMERICAN</h2>
+          <ul>
             <li>- Pão Brioche</li>
             <li>- Molho Levemente Defumado</li>
             <li>- Blend Premium na Brasa 200g</li>
@@ -151,14 +159,14 @@
             <li>- Picles Agridoce</li>
             <li>- Fatias de Bacon</li>
             <li>- Cebola Caramelizada</li>
-        </ul>
-        <p>Preço: R$ 25,00</p>
-        <img src="/imgs/10.jpg" alt="">
-        <button>Adicionar ao Carrinho</button>
-    </div>
-    <div class="BACON BBQ">
-        <h2>BACON BBQ</h2>
-        <ul>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/10.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div class="BACON BBQ">
+          <h2>BACON BBQ</h2>
+          <ul>
             <li>- Pão Brioche</li>
             <li>- Molho Levemente Defumado</li>
             <li>- Blend Premium 200g</li>
@@ -166,71 +174,288 @@
             <li>- Fatias de Bacon</li>
             <li>- Cebola Caramelizada</li>
             <li>- Molho Barbecue</li>
-        </ul>
-        <p>Preço: R$ 25,00</p>
-        <img src="/imgs/Hamb-redu/11.jpg" alt="">
-        <button>Adicionar ao Carrinho</button>  
-    </div>
-        
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Hamb-redu/11.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
       </section>
 
       <section class="x">
-        <h1>Hambúrguer X</h1>  
+        <h1>Hambúrguer X</h1>
         <div>
-            <h2>SALADA</h2> 
-            <ul>
-            <li> - Pão com Gergelim</li>
+          <h2>SALADA</h2>
+          <ul>
+            <li>- Pão com Gergelim</li>
             <li>- Molho Supreme</li>
             <li>- Blend Classic na Brasa 160g</li>
             <li>- Queijo Muçarela</li>
             <li>- Alface</li>
             <li>- Tomate</li>
             <li>- Cebola Roxa</li>
-            </ul>
-            <p>Preço: R$ 25,00</p>
-            <img src="/imgs/Hamb-redu/12.jpg" alt="">
-            <button>Adicionar ao Carrinho</button>  
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Hamb-redu/12.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
         </div>
-        <div class="BACON"> 
-            <h2>BACON</h2>
-            <ul>
-                
-        
-
-<li>- Pão com Gergelim</li>
-<li>- Molho Supreme</li>
-<li>- Blend Classic na Brasa 160g</li>
-<li>- Queijo Muçarela </li>
-<li>- Bacon em Fatias</li>
-<li>- Alface </li>
-<li>- Tomate </li>
-<li>- Cebola Roxa</li>
-            </ul>
-            <p>Preço: R$ 25,00</p>
-            <img src="/imgs/Hamb-redu/13.jpg" alt="">
-            <button>Adicionar ao Carrinho</button>  
+        <div class="BACON">
+          <h2>BACON</h2>
+          <ul>
+            <li>- Pão com Gergelim</li>
+            <li>- Molho Supreme</li>
+            <li>- Blend Classic na Brasa 160g</li>
+            <li>- Queijo Muçarela</li>
+            <li>- Bacon em Fatias</li>
+            <li>- Alface</li>
+            <li>- Tomate</li>
+            <li>- Cebola Roxa</li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Hamb-redu/13.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
         </div>
         <div class="BAGUNCINHA">
-                <h2>BAGUNÇINHA</h2>
-            <ul>
-                <li>- Pão com Gergelim</li>
-                <li>- Molho Supreme</li>
-                <li>- Blend Classic na Brasa 160g</li>
-                <li>- Queijo Muçarela</li>
-                <li>- Fatias de Bacon</li>
-                <li>- Ovo</li>
-                <li>- Salsicha</li>
-                <li>- Alface</li>
-                <li>- Tomate</li>
-                <li>- Cebola Roxa</li>  
-            </ul>
-            <p>Preço: R$ 25,00</p>
-            <img src="/imgs/Hamb-redu/14.jpg" alt="">
-            <button>Adicionar ao Carrinho</button>  
+          <h2>BAGUNÇINHA</h2>
+          <ul>
+            <li>- Pão com Gergelim</li>
+            <li>- Molho Supreme</li>
+            <li>- Blend Classic na Brasa 160g</li>
+            <li>- Queijo Muçarela</li>
+            <li>- Fatias de Bacon</li>
+            <li>- Ovo</li>
+            <li>- Salsicha</li>
+            <li>- Alface</li>
+            <li>- Tomate</li>
+            <li>- Cebola Roxa</li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Hamb-redu/14.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
         </div>
-      
       </section>
 
-    </main>
+      <section id="vegano">
+        <h1>Hambúrguer Vegano</h1>
+        <div>
+          <h2>VEG GOURMET</h2>
+          <ul>
+            <li>- Pão Brioche</li>
+            <li>- Molho Vegano</li>
+            <li>- Hambúrguer de Proteina de Soja 140g</li>
+            <li>- Cheddar Vegano</li>
+            <li>- Cebola Caramelizada</li>
+            <li>- Cebola Crispy</li>
+            <li>- Rúcula</li>
+            <li>- Tomate Seco</li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Hamb-redu/15.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>VEG GOURMET</h2>
+          <ul>
+            <li>- Pão Francês</li>
+            <li>- Molho Vegano</li>
+            <li>- Hambúrguer de proteina de Soja 140g</li>
+            <li>- Queijo Coalho Tostado</li>
+            <li>
+              - Salada Coleslaw (Salada Cremosa de Repolho, Cenoura, Cebola,
+              Coentro Fresco e Maionese)
+            </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Hamb-redu/15.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+      </section>
+      <section class="Porções">
+        <h1>Porções</h1>
+        <div>
+          <h2>BATATA FRITA CLASSICA</h2>
+          <ul>
+            <li>
+              " Não Existe Fritas Mais Saborosas Que as Queridinhas Crinkle,
+              Crocantes por fora e macia por dentro " " A MODALIDADE DELIVERY
+              DESSE PRODUTO PODE DIMINUIR A QUALIDADE DA CROCANCIA, DEVIDO AO
+              USO DE EMBALAGEM NO TRANSPORTE"
+            </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Porcoes/porc1.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>BATATA FRITA SUPREMA</h2>
+          <ul>
+            <li>
+              " Não Existe Fritas Mais Saborosas Que as Queridinhas Crinkle,
+              Crocantes por fora e macia por dentro, com cheddar e bacon fica
+              ainda melhor " " A MODALIDADE DELIVERY DESSE PRODUTO PODE DIMINUIR
+              A QUALIDADE DA CROCÂNCIA, DEVIDO AO USO DE EMBALAGEM NO
+              TRANSPORTE" 400 GRAMAS
+            </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Porcoes/porc2.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>BATATA FRITA SUPREMA</h2>
+          <ul>
+            <li>
+              Anéis de Cebola empanado, acompanhado de molho Supreme. 300 gramas
+            </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Porcoes/porc3.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>ISCAS DE FRANGO</h2>
+          <ul>
+            <li>
+              Iscas de frango empanados, acompanhado com molho supreme. 400
+              gramas
+            </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Porcoes/porc4.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+      </section>
+      <section>
+        <h1>Bebidas</h1>
+        <div>
+          <h2>AQUARIOS FRESH 500ML</h2>
+          <ul>
+            <li>- AQUARIOS FRESH 500ML</li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Refri-redu/1.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>SCHWEPPES TÔNICA 310ML</h2>
+          <ul>
+            <li>- SCHWEPPES TÔNICA 310ML  </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Refri-redu/2.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>COCA ZERO LATA 310ML</h2>
+          <ul>
+            <li>- COCA ZERO LATA 310ML  </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Refri-redu/3.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>SPRIT LATA 310ML</h2>
+          <ul>
+            <li>- SPRIT LATA 310ML </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Refri-redu/4.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>KUAT LATA 310ML</h2>
+          <ul>
+            <li>- KUAT LATA 310ML  </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Refri-redu/5.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>FANTA LARANJA 1,5L</h2>
+          <ul>
+            <li>- FANTA LARANJA 1,5L  </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Refri-redu/6.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>COCA-COLA 1,5L</h2>
+          <ul>
+            <li>- COCA-COLA 1,5L  </li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Refri-redu/7.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+      </section>  
+      <section>
+        <h1>Sobremesas</h1>
+        <div>
+          <h2>PIZZA DOCE</h2>
+          <ul>
+            <li>- PIZZA DOCE</li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Sobremesa/sobre1.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>Pudim de Chocolate</h2>
+          <ul>
+            <li>- Pudim de Chocolate</li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Sobremesa/sobre2.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>Pudim de Morango</h2>
+          <ul>
+            <li>- Pudim de Morango</li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Sobremesa/sobre3.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+        <div>
+          <h2>Bombocado</h2>
+          <ul>
+            <li>-   Bombocado</li>
+          </ul>
+          <p>Preço: R$ 25,00</p>
+          <img src="/imgs/Sobremesa/sobre4.jpg" alt="" />
+          <button>Adicionar ao Carrinho</button>
+        </div>
+      </section>
+    </main> 
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section about">
+          <h3>Quem Somos</h3>
+          <p>
+            Nosso restaurante oferece a melhor experiência gastronômica, com pratos deliciosos e um ambiente acolhedor.
+          </p>
+        </div>
+        <div class="footer-section links">
+          <h3>Links Rápidos</h3>
+          <ul>
+            <li><a href="#home">Início</a></li>
+            <li><a href="#cardapio">Cardápio</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-section social">
+          <h3>Redes Sociais</h3>
+          <a href="#"><img src="/imgs/facebook.png" alt="Facebook"></a>
+          <a href="#"><img src="/imgs/instagram.png" alt="Instagram"></a>
+          <a href="#"><img src="/imgs/whatsapp.png" alt="WhatsApp"></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2023 MAgosBurger | Todos os direitos reservados.
+      </div>
+    </footer>
   </body>
 </html>

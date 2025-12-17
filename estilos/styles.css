@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+}
+header {
+    background-image: url('/imgs/imagem_header.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 4rem; 
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2) ; 
+
+}
+h1.logo {
+    text-align: center;
+   font-size: 2rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0;
+  position: relative;
+  top: 100%;            /* move para o meio do header */
+  transform: translateY(-50%); /* ajusta centralizando verticalmente */
+    text-shadow: black 1px 1px 5px;
+  
+}   
+.menu { 
+    display: flex;
+   justify-content: right;
+    gap: 4rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+   
+
+   
+   
+}  
+ ul {
+    list-style: none;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    list-style: none;
+    background-color: #3B1F1F ;
+    padding: 0.5rem;
+    border-radius: 5px; 
+    display: flex;
+    align-items: center;
+    box-shadow: black 1px 1px 5px;  
+}
+.menu li {
+  list-style: none;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+/* Estilo base do ícone */
+.menu a::before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+ 
+}
+
+/* Ícones específicos */
+.menu-entra a::before {
+  background-image: url("/imgs/conecte-se.png");
+}
+
+.menu-cupom a::before {
+  background-image: url("/imgs/cupom.png");
+}
+
+.menu-carrinho a::before {
+  background-image: url("/imgs/carrinho-de-compras.png");
+}
+.menu a:hover {
+  color: #fff; /* Example: change text color on hover */
+  transform: scale(1.05); /* Example: slight scale effect on hover */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.menu a:hover::before {
+  filter: brightness(1.2); /* Example: brighten the icon on hover */
+  transition: filter 0.3s ease;
+}
+
+
+.menu-hamburguer {
+  display: inline-block;
+  width: 35px;
+  height: 25px;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none; /* remove sublinhado do link */
+}
+
+.menu-hamburguer span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background-color: #f10505; /* cor do hambúrguer */
+  margin: 5px 0;
+  border-radius: 2px;
+}
+.menu-hamburguer:hover {
+  opacity: 0.8;
+}
+.menu-hamburguer.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.menu-hamburguer.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-hamburguer.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.menu-hamburguer span {
+  transition: all 0.3s ease;
+}
+
+
+/* Menu */
+
