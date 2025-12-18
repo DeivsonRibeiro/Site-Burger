@@ -138,3 +138,110 @@ h1.logo {
 
 /* Menu */
 
+.h2menu {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #fcfbfb;
+
+    /* remove qualquer espaçamento externo */
+    margin: 0;
+
+    text-shadow: black 2px 1px 5px;
+    background-color: rgb(54, 54, 54);
+
+    /* REMOVA isto se não for estritamente necessário */
+    transform: none;
+}
+
+.menu-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;            /* permite quebrar linha */
+    gap: clamp(1.5rem, 5vw, 9rem); /* gap responsivo */
+
+    margin: 0;
+    padding: 2rem;
+
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+
+    background-color: #000000;
+    color: #ff6347;
+}
+
+.menu-2 a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.4rem;
+    list-style: none;
+    background-color: #B4121B ;
+    padding: 0.8rem;
+    border-radius: 5px; 
+    display: flex;
+    align-items: center;
+    box-shadow: black 1px 1px 5px;  
+}
+.menu-2 a:hover {
+    color: #fff; /* Example: change text color on hover */
+    transform: scale(1.05); /* Example: slight scale effect on hover */
+    transition: all 0.3s ease; /* Smooth transition */
+    box-shadow: black 1px 1px 5px;    
+}
+.form {
+    margin-top: 2rem; 
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    margin-right: 1.5rem;
+}
+  .form input {
+    padding: 1rem;
+    border-radius: 5px;
+    border: none;
+    box-shadow: black 1px 1px 5px;  
+} 
+
+
+.form button {
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: none;
+    box-shadow: black 1px 1px 5px;
+    background-color: #B4121B ; 
+    font-size: 1.3rem;
+} 
+  .form button:hover {
+    color: #920404; 
+    transform: scale(1.05); 
+    transition: all 0.3s ease; 
+    box-shadow: black 1px 1px 5px;    
+} 
+
+.fomr input::placeholder {
+    color: #ffffff;
+    font-size: 1.3rem;
+}
+h1 {
+    display: flex;      /* faz o container se ajustar ao texto */
+    
+    font-size: 2.4rem;
+    font-weight: 950;
+    color: #f80000;
+
+    text-align: left;           /* texto levemente à esquerda */
+    
+    padding: 1rem 8rem;         /* espaço interno elegante */
+    margin: 1.5rem auto 1rem 3rem;
+    /* topo | direita | baixo | esquerda */
+
+    text-shadow: rgb(187, 0, 0) 2px 1px 5px;
+    background-color: rgb(8, 8, 8);
+    box-shadow: black 1px 1px 5px;  
+    border-radius: 20px;   
+    
+} 
