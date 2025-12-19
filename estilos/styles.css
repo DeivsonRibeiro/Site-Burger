@@ -1,53 +1,90 @@
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+﻿@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
+:root {
+  /* Modern Dark Palette */
+  --bg-dark: #121212;
+  --bg-card: #202020;
+  --bg-input: #2c2c2c;
+
+  --primary: #e50914; /* Standard Red (Netflix/YouTube style) */
+  --primary-hover: #b20710;
+
+  --text-main: #ffffff;
+  --text-muted: #b3b3b3;
+
+  --accent-gold: #ffd700; /* For focus states */
+  --success: #28a745;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Oswald", sans-serif;
 }
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+}
+
 header {
-  background-image: url("/imgs/imagem_header.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("/imgs/imagem_header.jpg");
   background-size: cover;
   background-position: center;
   color: #fff;
   padding: 4rem;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
+
 h1.logo {
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 900;
-  color: #ffffff;
+  color: var(--primary);
   margin: 0;
   position: relative;
-  top: 100%; /* move para o meio do header */
-  transform: translateY(-50%); /* ajusta centralizando verticalmente */
-  text-shadow: black 1px 1px 5px;
+  /* top: 100%; removed to fix layout issue */
+  /* transform: translateY(-50%); removed */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 1rem;
 }
+
 .menu {
   display: flex;
   justify-content: right;
-  gap: 4rem;
-  margin-top: 1rem;
+  gap: 2rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
 }
+
 ul {
   list-style: none;
 }
 
 .menu a {
-  color: #ffffff;
+  color: var(--text-main);
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
   list-style: none;
-  background-color: #3b1f1f;
-  padding: 0.5rem;
-  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1); /* Glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px; /* Pill shape */
   display: flex;
   align-items: center;
-  box-shadow: black 1px 1px 5px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
 }
+
+.menu a:hover {
+  background-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+}
+
 .menu li {
   list-style: none;
 }
@@ -59,16 +96,17 @@ ul {
   text-decoration: none;
 }
 
-/* Estilo base do ícone */
+/* Base Icon Style */
 .menu a::before {
   content: "";
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-size: contain;
   background-repeat: no-repeat;
+  filter: invert(1); /* Ensure icons are white */
 }
 
-/* Ícones específicos */
+/* Specific Icons */
 .menu-entra a::before {
   background-image: url("/imgs/conecte-se.png");
 }
@@ -84,16 +122,6 @@ ul {
 .menu-carrinho a::before {
   background-image: url("/imgs/carrinho-de-compras.png");
 }
-.menu a:hover {
-  color: #fff; /* Example: change text color on hover */
-  transform: scale(1.05); /* Example: slight scale effect on hover */
-  transition: all 0.3s ease; /* Smooth transition */
-}
-
-.menu a:hover::before {
-  filter: brightness(1.2); /* Example: brighten the icon on hover */
-  transition: filter 0.3s ease;
-}
 
 .menu-hamburguer {
   display: inline-block;
@@ -108,7 +136,7 @@ ul {
   display: block;
   height: 4px;
   width: 100%;
-  background-color: #f10505; /* cor do hambúrguer */
+  background-color: var(--primary); /* cor do hambúrguer */
   margin: 5px 0;
   border-radius: 2px;
 }
@@ -137,13 +165,13 @@ ul {
   text-align: center;
   font-size: 2.4rem;
   font-weight: 900;
-  color: #fcfbfb;
+  color: var(--text-main);
 
   /* remove qualquer espaçamento externo */
   margin: 0;
 
-  text-shadow: black 2px 1px 5px;
-  background-color: rgb(54, 54, 54);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background-color: #1a1a1a;
 
   /* REMOVA isto se não for estritamente necessário */
   transform: none;
@@ -159,73 +187,79 @@ ul {
 
   margin: 0;
   padding: 1.5rem;
-
   font-size: clamp(1rem, 2.5vw, 1.2rem);
 
   background-color: #000000;
-  color: #ff6347;
+  color: var(--primary);
 }
 
 .menu-2 a {
   text-decoration: none;
-  color: #ffffff;
+  color: var(--text-muted);
   font-weight: bold;
   font-size: 1rem;
   list-style: none;
-  background-color: #b4121b;
+  background-color: transparent; /* Cleaner look */
   padding: 0.8rem;
   border-radius: 5px;
   display: flex;
   align-items: center;
-  box-shadow: black 1px 1px 5px;
+  transition: color 0.3s ease;
 }
 .menu-2 a:hover {
-  color: #fff; /* Example: change text color on hover */
+  color: var(--primary); /* Glow effect on hover */
   transform: scale(1.05); /* Example: slight scale effect on hover */
   transition: all 0.3s ease; /* Smooth transition */
-  box-shadow: black 1px 1px 5px;
 }
+
 .form {
   margin-top: 0.3rem;
   display: flex;
-  justify-content: right;
+  justify-content: center; /* Center search */
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1rem;
-  margin-right: 1.5rem;
+  margin-bottom: 2rem;
+  margin-right: 0;
 }
 .form input {
   padding: 1rem;
   border-radius: 5px;
-  border: none;
-  box-shadow: black 1px 1px 5px;
+  border: 1px solid #444;
+  background-color: var(--bg-input);
+  color: white;
+  width: 300px; /* Wider search bar */
+}
+.form input:focus {
+  outline: none;
+  border-color: var(--primary);
 }
 
 .form button {
   padding: 0.8rem;
   border-radius: 5px;
   border: none;
-  box-shadow: black 1px 1px 5px;
-  background-color: #b4121b;
+  background-color: var(--primary);
+  color: white;
   font-size: 1.3rem;
+  cursor: pointer;
 }
 .form button:hover {
-  color: #920404;
+  background-color: var(--primary-hover);
   transform: scale(1.05);
   transition: all 0.3s ease;
-  box-shadow: black 1px 1px 5px;
 }
 
 .fomr input::placeholder {
-  color: #ffffff;
-  font-size: 1.3rem;
+  color: #888;
+  font-size: 1rem;
 }
+
 h1:not(.logo) {
   display: flex; /* faz o container se ajustar ao texto */
 
   font-size: 2.4rem;
   font-weight: 950;
-  color: #f80000;
+  color: var(--primary);
 
   text-align: left; /* texto levemente à esquerda */
 
@@ -233,11 +267,12 @@ h1:not(.logo) {
 
   margin-bottom: 1rem;
 
-  text-shadow: #f80000 2px 1px 5px;
-  background-color: rgba(238, 22, 22, 0.514);
-  box-shadow: black 2px 2px 5px;
+  text-shadow: none;
+  background-color: transparent; /* Cleaner */
+  box-shadow: none;
 
   padding-left: 2rem;
+  border-left: 4px solid var(--primary); /* Modern accent */
 }
 
 .card-container {
@@ -249,7 +284,7 @@ h1:not(.logo) {
 }
 
 .card {
-  background-color: rgb(233, 83, 83);
+  background-color: var(--bg-card); /* Dark Gray Card */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -258,8 +293,14 @@ h1:not(.logo) {
   min-height: 450px;
 
   padding: 1.6rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid #333;
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
 }
 
 .card-text {
@@ -268,12 +309,13 @@ h1:not(.logo) {
   gap: 0.8rem;
   flex: 1;
   font-size: 1rem;
+  color: var(--text-muted);
 }
 h2 {
   font-size: 1.5rem;
   font-weight: 950;
-  color: #f80000;
-  padding-bottom: 2rem;
+  color: var(--text-main);
+  padding-bottom: 1rem;
 }
 
 .card img {
@@ -281,7 +323,7 @@ h2 {
   height: auto;
   margin-left: 1rem;
   border-radius: 10px;
-  box-shadow: black 1px 1px 5px;
+  /* box-shadow: black 1px 1px 5px; removed for flatter look */
 }
 
 .card ul {
@@ -297,19 +339,22 @@ h2 {
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
+  background-color: var(--primary);
+  color: white;
 }
 
 .card button:hover {
-  color: #920404;
+  background-color: var(--primary-hover);
+  color: white;
   transform: scale(1.05);
   transition: all 0.3s ease;
-  box-shadow: black 1px 1px 5px;
 }
 
 .frete-quadrado {
   width: 250px; /* largura do quadrado */
   height: 250px; /* altura do quadrado */
-  background: linear-gradient(135deg, #2b2b2b, #3b1f1f);
+  background: var(--bg-card);
+  border: 1px solid #333;
   border-radius: 20px;
   padding: 15px;
   display: flex;
@@ -317,7 +362,7 @@ h2 {
   justify-content: space-around;
   align-items: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  color: #b4ae8d;
+  color: var(--text-muted);
   text-align: center;
   margin-top: 0.5rem;
 }
@@ -325,9 +370,9 @@ h2 {
 .frete-quadrado input {
   width: 80%;
   padding: 0.5rem;
-  border: 2px solid #f80000;
+  border: 1px solid #555;
   border-radius: 12px;
-  background-color: #2b2b2b;
+  background-color: var(--bg-input);
   color: #fff;
   font-weight: bold;
   font-size: 0.9rem;
@@ -337,12 +382,12 @@ h2 {
 
 .frete-quadrado input:focus {
   outline: none;
-  border-color: #ffd700;
-  box-shadow: 0 0 6px #ffd700;
+  border-color: var(--primary);
+  box-shadow: 0 0 6px rgba(229, 9, 20, 0.5);
 }
 
 .frete-quadrado input::placeholder {
-  color: #f0f0f0;
+  color: #888;
   font-size: 0.9rem;
 }
 
@@ -351,7 +396,7 @@ h2 {
   padding: 0.5rem;
   border: none;
   border-radius: 12px;
-  background-color: #f80000;
+  background-color: var(--primary);
   color: #fff;
   font-weight: bold;
   font-size: 0.9rem;
@@ -361,7 +406,7 @@ h2 {
 }
 
 .frete-quadrado button:hover {
-  background-color: #ff3333;
+  background-color: var(--primary-hover);
   transform: scale(1.05);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
@@ -370,7 +415,7 @@ h2 {
   width: 90%;
   padding: 0.5rem;
   border-radius: 12px;
-  background: rgba(255, 215, 0, 0.1); /* leve destaque dourado */
+  background: rgba(255, 255, 255, 0.05); /* leve destaque */
   color: #fcfcfc;
   font-size: 0.9rem;
   font-weight: bold;
@@ -394,10 +439,11 @@ h2 {
 }
 
 .footer {
-  background-color: #111;
-  color: #fff;
+  background-color: #0d0d0d;
+  color: #888;
   padding: 3rem 1.5rem 1rem;
   margin-top: 4rem;
+  border-top: 1px solid #222;
 }
 
 .footer-content {
@@ -417,7 +463,7 @@ h2 {
 .footer-section h3 {
   margin-bottom: 1rem;
   font-size: 1.2rem;
-  color: #f80000;
+  color: var(--text-main);
 }
 
 .footer-section p {
@@ -435,13 +481,13 @@ h2 {
 }
 
 .footer-section ul li a {
-  color: #ccc;
+  color: #888;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-section ul li a:hover {
-  color: #f80000;
+  color: var(--primary);
 }
 
 .social-icons {
@@ -452,6 +498,8 @@ h2 {
 .social-icons img {
   width: 28px;
   transition: transform 0.3s;
+  background: white; /* Make icons visible on black */
+  border-radius: 50%; /* Optional circle bg */
 }
 
 .social-icons img:hover {
@@ -462,8 +510,8 @@ h2 {
   text-align: center;
   margin-top: 2rem;
   font-size: 0.85rem;
-  color: #aaa;
-  border-top: 1px solid #333;
+  color: #555;
+  border-top: 1px solid #222;
   padding-top: 1rem;
 }
 
@@ -484,16 +532,17 @@ h2 {
 }
 
 .modal-content {
-  background-color: #1f1f1f;
+  background-color: var(--bg-card);
   margin: auto;
   padding: 2rem;
-  border: 2px solid #b4121b;
+  border: 1px solid #333;
   border-radius: 15px;
   width: 90%;
   max-width: 450px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
   position: relative;
   animation: slideIn 0.3s ease;
+  color: var(--text-main);
 }
 
 @keyframes slideIn {
@@ -521,7 +570,7 @@ h2 {
 
 .close-btn:hover,
 .close-btn:focus {
-  color: #f80000;
+  color: var(--primary);
   text-decoration: none;
   cursor: pointer;
 }
@@ -547,8 +596,8 @@ h2 {
 }
 
 .tab-btn.active {
-  color: #f80000;
-  border-bottom: 2px solid #f80000;
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
 }
 
 .tab-btn:hover {
@@ -589,22 +638,22 @@ h2 {
   padding: 1rem;
   border-radius: 8px;
   border: 1px solid #333;
-  background-color: #2b2b2b;
+  background-color: var(--bg-input);
   color: #fff;
   font-size: 1rem;
 }
 
 .input-group input:focus {
   outline: none;
-  border-color: #f80000;
-  box-shadow: 0 0 5px rgba(248, 0, 0, 0.5);
+  border-color: var(--primary);
+  box-shadow: 0 0 5px rgba(229, 9, 20, 0.5);
 }
 
 .auth-submit {
   padding: 1rem;
   border-radius: 8px;
   border: none;
-  background-color: #b4121b;
+  background-color: var(--primary);
   color: #fff;
   font-size: 1.1rem;
   font-weight: bold;
@@ -614,7 +663,7 @@ h2 {
 }
 
 .auth-submit:hover {
-  background-color: #f80000;
+  background-color: var(--primary-hover);
   transform: scale(1.02);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -630,7 +679,7 @@ h2 {
   right: 10px;
   width: 35px;
   height: 35px;
-  background-color: #b4121b;
+  background-color: var(--primary);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -645,7 +694,7 @@ h2 {
 }
 
 .customize-icon:hover {
-  background-color: #f80000;
+  background-color: var(--primary-hover);
   transform: scale(1.1);
 }
 
@@ -664,14 +713,14 @@ h2 {
   gap: 10px;
   font-size: 1.1rem;
   padding: 0.5rem;
-  background-color: #2b2b2b;
+  background-color: var(--bg-db);
   border-radius: 8px;
 }
 
 .extra-item input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  accent-color: #b4121b;
+  accent-color: var(--primary);
   cursor: pointer;
 }
 
@@ -686,7 +735,7 @@ h2 {
 .qty-btn {
   width: 40px;
   height: 40px;
-  background-color: #b4121b;
+  background-color: var(--primary);
   border: none;
   border-radius: 50%;
   color: white;
@@ -699,7 +748,7 @@ h2 {
 }
 
 .qty-btn:hover {
-  background-color: #f80000;
+  background-color: var(--primary-hover);
   transform: scale(1.1);
 }
 
@@ -714,7 +763,7 @@ h2 {
 .add-order-btn {
   width: 100%;
   padding: 1rem;
-  background-color: #28a745;
+  background-color: var(--success);
   color: white;
   border: none;
   border-radius: 8px;
@@ -743,7 +792,7 @@ h2 {
 .qty-btn-small {
   width: 25px;
   height: 25px;
-  background-color: #555;
+  background-color: #444; /* Darker grey */
   border: none;
   border-radius: 5px;
   color: white;
@@ -755,7 +804,7 @@ h2 {
 }
 
 .qty-btn-small:hover {
-  background-color: #777;
+  background-color: #666;
 }
 
 .qty-val-small {
@@ -763,4 +812,7 @@ h2 {
   font-weight: bold;
   width: 20px;
   text-align: center;
+  color: white;
 }
+
+
