@@ -1,4 +1,4 @@
-const calcularFreteBtn = document.getElementById('calcularFrete');
+﻿const calcularFreteBtn = document.getElementById('calcularFrete');
 if (calcularFreteBtn) {
   calcularFreteBtn.addEventListener('click', async () => {
     const cep = document.getElementById('cep').value.replace(/\D/g, '');
@@ -33,35 +33,35 @@ if (calcularFreteBtn) {
 
 
 // Modal Login/Cadastro Logic
-const modal = document.getElementById("authModal");
-const btn = document.getElementById("openLoginBtn");
-const span = document.getElementsByClassName("close-btn")[0];
+const modal = document.getElementById('authModal');
+const btn = document.getElementById('openLoginBtn');
+const span = document.getElementsByClassName('close-btn')[0];
 
 // Tab buttons
-const tabLogin = document.getElementById("tabLogin");
-const tabRegister = document.getElementById("tabRegister");
-const loginForm = document.getElementById("loginForm");
-const registerForm = document.getElementById("registerForm");
+const tabLogin = document.getElementById('tabLogin');
+const tabRegister = document.getElementById('tabRegister');
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
 
 // Open modal
 if (btn && modal) {
   btn.onclick = function(e) {
     e.preventDefault();
-    modal.style.display = "flex";
+    modal.style.display = 'flex';
   }
 }
 
 // Close modal
 if (span && modal) {
   span.onclick = function() {
-    modal.style.display = "none";
+    modal.style.display = 'none';
   }
 }
 
 // Close modal when clicking outside
 window.onclick = function(event) {
   if (modal && event.target == modal) {
-    modal.style.display = "none";
+    modal.style.display = 'none';
   }
 }
 
@@ -123,7 +123,7 @@ function updateUI() {
     const user = getCurrentUser();
     const loginBtnLink = document.getElementById('openLoginBtn'); // The <a> tag
     const loginLi = document.querySelector('.menu-entra'); // The parent <li>
-
+    
     if (user && loginBtnLink && loginLi) {
         // Logged In
         loginBtnLink.innerHTML = `Olá, ${user.name.split(' ')[0]}`; // First name only
@@ -144,12 +144,12 @@ function updateUI() {
 
     } else if (loginBtnLink && loginLi) {
         // Logged Out
-        loginBtnLink.innerHTML = `Entrar ou Cadastrar`;
+        loginBtnLink.innerHTML = 'Entrar ou Cadastrar';
         loginLi.classList.remove('logged-in');
 
         // Restore modal listener logic
         // We need to re-attach the modal opening logic because we cloned the node
-        const modal = document.getElementById("authModal");
+        const modal = document.getElementById('authModal');
         
         // Remove old listeners (if any from logout step)
         const newBtn = loginBtnLink.cloneNode(true);
@@ -159,7 +159,7 @@ function updateUI() {
         if (modal) {
             newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                modal.style.display = "flex";
+                modal.style.display = 'flex';
             });
         }
     }
@@ -284,25 +284,6 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// Quantity Logic (Main Product)
-if (btnMinus && btnPlus && qtyValue) {
-    btnMinus.addEventListener('click', () => {
-        let val = parseInt(qtyValue.textContent);
-        if (val > 1) {
-            val--;
-            qtyValue.textContent = val;
-            currentProduct.quantity = val;
-        }
-    });
-    
-    btnPlus.addEventListener('click', () => {
-        let val = parseInt(qtyValue.textContent);
-        val++;
-        qtyValue.textContent = val;
-        currentProduct.quantity = val;
-    });
-}
-
 // Logic for Extra Items (Individual Quantities)
 document.querySelectorAll('.extra-item').forEach(item => {
     const minBtn = item.querySelector('.minus');
@@ -340,7 +321,7 @@ if (addToOrderBtn) {
         });
         
         currentProduct.extras = extras;
-        currentProduct.quantity = parseInt(qtyValue.textContent);
+        currentProduct.quantity = 1; // Default to 1 since we removed the selector
         
         // Simulating Add to Cart
         alert('Adicionado ao pedido:\n' + currentProduct.name + '\nQtd: ' + currentProduct.quantity + '\nExtras: ' + (extras.join(', ') || 'Nenhum'));
@@ -349,3 +330,60 @@ if (addToOrderBtn) {
     });
 }
 
+// Coupon Modal Logic
+const couponModal = document.getElementById('couponModal');
+const openCouponBtn = document.getElementById('openCouponBtn');
+const closeCouponBtn = document.getElementById('closeCoupon');
+const applyCouponBtn = document.getElementById('applyCouponBtn');
+const couponCodeInput = document.getElementById('couponCode');
+const couponMessage = document.getElementById('couponMessage');
+const closeCouponIcon = document.getElementById('closeCouponIcon'); // NEW: For the button I will add
+
+// Valid Coupons (Mock)
+const VALID_COUPONS = ['MAGOS10', 'WELCOME', 'BURGER2025'];
+
+if (openCouponBtn && couponModal) {
+    openCouponBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        couponModal.style.display = 'flex';
+        if(couponMessage) couponMessage.textContent = '';
+        if(couponCodeInput) couponCodeInput.value = '';
+    });
+}
+
+function closeCoupon() {
+    if(couponModal) couponModal.style.display = 'none';
+}
+
+if (closeCouponBtn) {
+    closeCouponBtn.addEventListener('click', closeCoupon);
+}
+if (closeCouponIcon) {
+   closeCouponIcon.addEventListener('click', closeCoupon);
+}
+
+window.addEventListener('click', (event) => {
+    if (event.target == couponModal) {
+        couponModal.style.display = 'none';
+    }
+});
+
+if (applyCouponBtn && couponCodeInput && couponMessage) {
+    applyCouponBtn.addEventListener('click', () => {
+        const code = couponCodeInput.value.trim().toUpperCase();
+        
+        if (!code) {
+             couponMessage.textContent = 'Por favor, digite um código.';
+             couponMessage.style.color = 'orange';
+             return;
+        }
+        
+        if (VALID_COUPONS.includes(code)) {
+            couponMessage.textContent = 'Cupom válido! Desconto aplicado.';
+            couponMessage.style.color = '#28a745'; // Green
+        } else {
+            couponMessage.textContent = 'Cupom inválido ou expirado.';
+            couponMessage.style.color = '#dc3545'; // Red
+        }
+    });
+}

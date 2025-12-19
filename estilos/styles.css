@@ -639,7 +639,7 @@ h2 {
   font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   z-index: 10;
   transition: all 0.3s ease;
 }
@@ -668,7 +668,7 @@ h2 {
   border-radius: 8px;
 }
 
-.extra-item input[type='checkbox'] {
+.extra-item input[type="checkbox"] {
   width: 20px;
   height: 20px;
   accent-color: #b4121b;
@@ -729,7 +729,6 @@ h2 {
   background-color: #218838;
 }
 
-
 /* Small Quantity Controls for Extras */
 .extra-item {
   justify-content: space-between;
@@ -765,4 +764,3 @@ h2 {
   width: 20px;
   text-align: center;
 }
-

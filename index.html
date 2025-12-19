@@ -14,7 +14,7 @@
           <li class="menu-entra">
             <a href="#" id="openLoginBtn">Entrar ou Cadastrar</a>
           </li>
-          <li class="menu-cupom"><a href="#">Cupons</a></li>
+          <li class="menu-cupom"><a href="#" id="openCouponBtn">Cupons</a></li>
           <li class="menu-carrinho"><a href="#">Carrinho</a></li>
         </ul>
         <ul class="menu-hamburguer">
@@ -891,14 +891,51 @@
           </div>
         </div>
 
-        <div class="quantity-control">
-          <button class="qty-btn" id="btnMinus">-</button>
-          <span id="qtyValue">1</span>
-          <button class="qty-btn" id="btnPlus">+</button>
-        </div>
-
         <button class="add-order-btn" id="addToOrderBtn">
           Adicionar ao Pedido
+        </button>
+      </div>
+    </div>
+    <!-- Modal de Cupons -->
+    <div id="couponModal" class="modal">
+      <div class="modal-content" style="text-align: center">
+        <span class="close-btn" id="closeCoupon">&times;</span>
+        <h2 style="color: white; margin-bottom: 1rem">Aplicar Cupom</h2>
+
+        <div class="input-group">
+          <input
+            type="text"
+            id="couponCode"
+            placeholder="Digite seu cupom aqui"
+            style="text-transform: uppercase"
+          />
+        </div>
+
+        <button
+          id="applyCouponBtn"
+          class="auth-submit"
+          style="width: 100%; margin-top: 1rem"
+        >
+          Aplicar
+        </button>
+
+        <p
+          id="couponMessage"
+          style="margin-top: 1rem; font-weight: bold; min-height: 1.5rem"
+        ></p>
+        <button
+          id="closeCouponIcon"
+          style="
+            margin-top: 1rem;
+            background: transparent;
+            border: 1px solid #777;
+            color: #aaa;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+          "
+        >
+          Fechar
         </button>
       </div>
     </div>
