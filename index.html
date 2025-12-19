@@ -11,7 +11,9 @@
       <h1 class="logo">MAgosBURGER — magia de verdade em cada mordida. ✨🍔</h1>
       <nav>
         <ul class="menu">
-          <li class="menu-entra"><a href="#">Entrar ou Cadastrar</a></li>
+          <li class="menu-entra">
+            <a href="#" id="openLoginBtn">Entrar ou Cadastrar</a>
+          </li>
           <li class="menu-cupom"><a href="#">Cupons</a></li>
           <li class="menu-carrinho"><a href="#">Carrinho</a></li>
         </ul>
@@ -39,13 +41,13 @@
         <a href="#bebidas">Bebidas</a>
         <a href="#sobremesas">Sobremesas</a>
       </nav>
-<div class="frete-quadrado">
-  <input type="text" id="cep" placeholder="Digite seu CEP">
-  <button id="calcularFrete">Calcular</button>
-  <div class="resultadoFrete" id="resultadoFrete">
-    <p>Digite seu CEP para calcular o frete</p>
-  </div>
-</div>
+      <div class="frete-quadrado">
+        <input type="text" id="cep" placeholder="Digite seu CEP" />
+        <button id="calcularFrete">Calcular</button>
+        <div class="resultadoFrete" id="resultadoFrete">
+          <p>Digite seu CEP para calcular o frete</p>
+        </div>
+      </div>
       <div>
         <form class="form">
           <input type="search" name="" id="" placeholder="BUSCAR PRODUTO" />
@@ -54,8 +56,15 @@
       </div>
       <h1>Hambúrguers Clássicos <a href="#classico"></a></h1>
       <!--Menu de Hambúrguer Clássico-->
-      <section class="card-container" id="classico" >
+      <section class="card-container" id="classico">
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>SMASH CLASSIC</h2>
 
@@ -77,6 +86,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>SMASH DOUBLE</h2>
             <ul>
@@ -97,6 +113,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>SMASH TRIPLO</h2>
             <ul>
@@ -119,6 +142,13 @@
       <h1>Hambúrguer Premium</h1>
       <section id="premium" class="card-container">
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>CHEESE</h2>
             <ul>
@@ -139,6 +169,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>FABULOUS</h2>
             <ul>
@@ -157,6 +194,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>GORGONZOL</h2>
             <ul>
@@ -177,6 +221,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>AMERICAN</h2>
             <ul>
@@ -195,6 +246,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>BACON BBQ</h2>
             <ul>
@@ -217,6 +275,13 @@
       <h1>Hambúrguer X</h1>
       <section class="x card-container" id="x">
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>SALADA</h2>
             <ul>
@@ -235,6 +300,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>BACON</h2>
             <ul>
@@ -254,6 +326,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>BAGUNÇINHA</h2>
             <ul>
@@ -279,6 +358,13 @@
       <h1>Hambúrguer Vegano</h1>
       <section id="vegano" class="card-container">
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>VEG GOURMET</h2>
             <ul>
@@ -298,6 +384,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>VEG GOURMET</h2>
             <ul>
@@ -322,6 +415,13 @@
 
       <section id="porcoes" class="card-container">
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>BATATA FRITA CLÁSSICA</h2>
             <ul>
@@ -342,6 +442,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>BATATA FRITA SUPREMA</h2>
             <ul>
@@ -361,6 +468,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>ANÉIS DE CEBOLA</h2>
             <ul>
@@ -375,6 +489,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>ISCAS DE FRANGO</h2>
             <ul>
@@ -394,6 +515,13 @@
 
       <section id="bebidas" class="card-container">
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>AQUARIUS FRESH 500ML</h2>
             <p>Garrafa 500ml</p>
@@ -404,6 +532,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>SCHWEPPES TÔNICA 310ML</h2>
             <p>Lata 310ml</p>
@@ -414,6 +549,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>COCA-COLA ZERO 310ML</h2>
             <p>Lata 310ml</p>
@@ -424,6 +566,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>SPRITE LATA 310ML</h2>
             <p>Lata 310ml</p>
@@ -434,6 +583,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>KUAT LATA 310ML</h2>
             <p>Lata 310ml</p>
@@ -444,6 +600,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>FANTA LARANJA 1,5L</h2>
             <p>Garrafa 1,5L</p>
@@ -454,6 +617,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>COCA-COLA 1,5L</h2>
             <p>Garrafa 1,5L</p>
@@ -470,6 +640,13 @@
 
       <section id="sobremesas" class="card-container">
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>PIZZA DOCE</h2>
             <p>Pizza doce artesanal</p>
@@ -480,6 +657,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>PUDIM DE CHOCOLATE</h2>
             <p>Pudim cremoso de chocolate</p>
@@ -490,6 +674,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>PUDIM DE MORANGO</h2>
             <p>Pudim cremoso de morango</p>
@@ -500,6 +691,13 @@
         </div>
 
         <div class="card">
+          <div
+            class="customize-icon"
+            onclick="window.openCustomizeModal(this)"
+            title="Personalizar"
+          >
+            +
+          </div>
           <div class="card-text">
             <h2>BOMBOCADO</h2>
             <p>Bombocado tradicional</p>
@@ -509,7 +707,6 @@
           <img src="/imgs/Sobremesa/sobre4.jpg" alt="Bombocado" />
         </div>
       </section>
-      <script src="javascript/scriprt.js"></script> 
     </main>
 
     <!--Footer-->
@@ -552,5 +749,159 @@
         © 2025 MagosBurger | Todos os direitos reservados.
       </div>
     </footer>
+    <!-- Modal de Login/Cadastro -->
+    <div id="authModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+
+        <div class="auth-tabs">
+          <button id="tabLogin" class="tab-btn active">Entrar</button>
+          <button id="tabRegister" class="tab-btn">Cadastrar</button>
+        </div>
+
+        <!-- Formulario de Login -->
+        <div id="loginForm" class="auth-form active">
+          <h2>Bem-vindo de volta!</h2>
+          <form>
+            <div class="input-group">
+              <label for="loginEmail">E-mail</label>
+              <input
+                type="email"
+                id="loginEmail"
+                placeholder="Seu e-mail"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="loginPassword">Senha</label>
+              <input
+                type="password"
+                id="loginPassword"
+                placeholder="Sua senha"
+                required
+              />
+            </div>
+            <button type="submit" class="auth-submit">Entrar</button>
+          </form>
+        </div>
+
+        <!-- Formulario de Cadastro -->
+        <div id="registerForm" class="auth-form">
+          <h2>Crie sua conta</h2>
+          <form>
+            <div class="input-group">
+              <label for="regName">Nome Completo</label>
+              <input type="text" id="regName" placeholder="Seu nome" required />
+            </div>
+            <div class="input-group">
+              <label for="regEmail">E-mail</label>
+              <input
+                type="email"
+                id="regEmail"
+                placeholder="Seu e-mail"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="regPassword">Senha</label>
+              <input
+                type="password"
+                id="regPassword"
+                placeholder="Crie uma senha"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="regPasswordConfirm">Confirmar Senha</label>
+              <input
+                type="password"
+                id="regPasswordConfirm"
+                placeholder="Confirme a senha"
+                required
+              />
+            </div>
+            <button type="submit" class="auth-submit">Cadastrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Modal de Personalização -->
+    <div id="customizeModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" id="closeCustomize">&times;</span>
+        <h2 id="custProductTitle" style="color: white; text-align: center">
+          Produto
+        </h2>
+
+        <div class="extras-container">
+          <h3 style="color: #f80000">Adicionar Extras:</h3>
+
+          <div class="extra-item" data-name="Queijo Extra">
+            <span>Queijo Extra</span>
+            <div class="qty-control-small">
+              <button class="qty-btn-small minus">-</button>
+              <span class="qty-val-small">0</span>
+              <button class="qty-btn-small plus">+</button>
+            </div>
+          </div>
+
+          <div class="extra-item" data-name="Cebola">
+            <span>Cebola</span>
+            <div class="qty-control-small">
+              <button class="qty-btn-small minus">-</button>
+              <span class="qty-val-small">0</span>
+              <button class="qty-btn-small plus">+</button>
+            </div>
+          </div>
+
+          <div class="extra-item" data-name="Bacon">
+            <span>Bacon</span>
+            <div class="qty-control-small">
+              <button class="qty-btn-small minus">-</button>
+              <span class="qty-val-small">0</span>
+              <button class="qty-btn-small plus">+</button>
+            </div>
+          </div>
+
+          <div class="extra-item" data-name="Pimenta">
+            <span>Pimenta</span>
+            <div class="qty-control-small">
+              <button class="qty-btn-small minus">-</button>
+              <span class="qty-val-small">0</span>
+              <button class="qty-btn-small plus">+</button>
+            </div>
+          </div>
+
+          <div class="extra-item" data-name="Molho Especial">
+            <span>Molho Especial</span>
+            <div class="qty-control-small">
+              <button class="qty-btn-small minus">-</button>
+              <span class="qty-val-small">0</span>
+              <button class="qty-btn-small plus">+</button>
+            </div>
+          </div>
+
+          <div class="extra-item" data-name="Ovo">
+            <span>Ovo</span>
+            <div class="qty-control-small">
+              <button class="qty-btn-small minus">-</button>
+              <span class="qty-val-small">0</span>
+              <button class="qty-btn-small plus">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="quantity-control">
+          <button class="qty-btn" id="btnMinus">-</button>
+          <span id="qtyValue">1</span>
+          <button class="qty-btn" id="btnPlus">+</button>
+        </div>
+
+        <button class="add-order-btn" id="addToOrderBtn">
+          Adicionar ao Pedido
+        </button>
+      </div>
+    </div>
+    <script src="javascript/scriprt.js"></script>
   </body>
 </html>

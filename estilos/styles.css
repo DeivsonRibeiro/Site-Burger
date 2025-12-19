@@ -73,6 +73,10 @@ ul {
   background-image: url("/imgs/conecte-se.png");
 }
 
+.menu-entra.logged-in a::before {
+  background-image: url("/imgs/user_profile.png");
+}
+
 .menu-cupom a::before {
   background-image: url("/imgs/cupom.png");
 }
@@ -303,8 +307,8 @@ h2 {
 }
 
 .frete-quadrado {
-  width: 250px;            /* largura do quadrado */
-  height: 250px;           /* altura do quadrado */
+  width: 250px; /* largura do quadrado */
+  height: 250px; /* altura do quadrado */
   background: linear-gradient(135deg, #2b2b2b, #3b1f1f);
   border-radius: 20px;
   padding: 15px;
@@ -312,11 +316,10 @@ h2 {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   color: #b4ae8d;
   text-align: center;
   margin-top: 0.5rem;
-  
 }
 
 .frete-quadrado input {
@@ -330,7 +333,6 @@ h2 {
   font-size: 0.9rem;
   text-align: center;
   transition: all 0.3s ease;
- 
 }
 
 .frete-quadrado input:focus {
@@ -355,20 +357,20 @@ h2 {
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .frete-quadrado button:hover {
   background-color: #ff3333;
   transform: scale(1.05);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .frete-quadrado .resultadoFrete {
   width: 90%;
   padding: 0.5rem;
   border-radius: 12px;
-  background: rgba(255,215,0,0.1); /* leve destaque dourado */
+  background: rgba(255, 215, 0, 0.1); /* leve destaque dourado */
   color: #fcfcfc;
   font-size: 0.9rem;
   font-weight: bold;
@@ -464,3 +466,303 @@ h2 {
   border-top: 1px solid #333;
   padding-top: 1rem;
 }
+
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #1f1f1f;
+  margin: auto;
+  padding: 2rem;
+  border: 2px solid #b4121b;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.close-btn {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #f80000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Auth Tabs */
+.auth-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #333;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: #aaaaaa;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.tab-btn.active {
+  color: #f80000;
+  border-bottom: 2px solid #f80000;
+}
+
+.tab-btn:hover {
+  color: #fff;
+}
+
+/* Auth Forms */
+.auth-form {
+  display: none;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.auth-form.active {
+  display: flex;
+}
+
+.auth-form h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  padding-bottom: 0;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-group label {
+  color: #ddd;
+  font-size: 0.9rem;
+}
+
+.input-group input {
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: #2b2b2b;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #f80000;
+  box-shadow: 0 0 5px rgba(248, 0, 0, 0.5);
+}
+
+.auth-submit {
+  padding: 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #b4121b;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.auth-submit:hover {
+  background-color: #f80000;
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Customize Icon on Cards */
+.card {
+  position: relative; /* Ensure absolute positioning works inside */
+}
+
+.customize-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 35px;
+  height: 35px;
+  background-color: #b4121b;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.customize-icon:hover {
+  background-color: #f80000;
+  transform: scale(1.1);
+}
+
+/* Customization Modal Styles */
+.extras-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  color: white;
+}
+
+.extra-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  background-color: #2b2b2b;
+  border-radius: 8px;
+}
+
+.extra-item input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  accent-color: #b4121b;
+  cursor: pointer;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.qty-btn {
+  width: 40px;
+  height: 40px;
+  background-color: #b4121b;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.qty-btn:hover {
+  background-color: #f80000;
+  transform: scale(1.1);
+}
+
+#qtyValue {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  width: 50px;
+  text-align: center;
+}
+
+.add-order-btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s;
+}
+
+.add-order-btn:hover {
+  background-color: #218838;
+}
+
+
+/* Small Quantity Controls for Extras */
+.extra-item {
+  justify-content: space-between;
+}
+
+.qty-control-small {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty-btn-small {
+  width: 25px;
+  height: 25px;
+  background-color: #555;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qty-btn-small:hover {
+  background-color: #777;
+}
+
+.qty-val-small {
+  font-size: 1rem;
+  font-weight: bold;
+  width: 20px;
+  text-align: center;
+}
+
