@@ -88,6 +88,7 @@ if (tabLogin && tabRegister && loginForm && registerForm) {
 // Local Database & Session Logic
 const DB_KEY = 'magosBurgerUsers';
 const SESSION_KEY = 'magosBurgerCurrentUser';
+const CART_KEY = 'magosBurgerCart';
 
 // Helper: Get users from localStorage
 function getUsers() {
@@ -118,6 +119,36 @@ function logoutUser() {
     alert('Você saiu da sua conta.');
 }
 
+// Helper: Get Cart
+function getCart() {
+    const cart = localStorage.getItem(CART_KEY);
+    return cart ? JSON.parse(cart) : [];
+}
+
+// Helper: Save Cart
+function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
+// Helper: Add to Cart
+function addToCart(product) {
+    const cart = getCart();
+    cart.push(product);
+    saveCart(cart);
+    updateCartCount(); // Update count
+    alert('Produto adicionado ao carrinho!');
+}
+
+function updateCartCount() {
+    const cart = getCart();
+    const count = cart.length;
+    const countSpan = document.getElementById('cartCount');
+    if (countSpan) {
+        countSpan.textContent = count;
+        countSpan.style.display = count > 0 ? 'inline-flex' : 'none';
+    }
+}
+
 // Update UI based on auth state
 function updateUI() {
     const user = getCurrentUser();
@@ -130,7 +161,6 @@ function updateUI() {
         loginLi.classList.add('logged-in');
         
         // Remove old event listeners by cloning
-        // Note: This removes ANY listener on the node.
         const newBtn = loginBtnLink.cloneNode(true);
         loginBtnLink.parentNode.replaceChild(newBtn, loginBtnLink);
 
@@ -148,14 +178,10 @@ function updateUI() {
         loginLi.classList.remove('logged-in');
 
         // Restore modal listener logic
-        // We need to re-attach the modal opening logic because we cloned the node
         const modal = document.getElementById('authModal');
-        
-        // Remove old listeners (if any from logout step)
         const newBtn = loginBtnLink.cloneNode(true);
         loginBtnLink.parentNode.replaceChild(newBtn, loginBtnLink);
         
-        // Re-attach modal listener
         if (modal) {
             newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -163,6 +189,7 @@ function updateUI() {
             });
         }
     }
+    updateCartCount(); // Ensure count is correct on load/update
 }
 
 // Registration Logic
@@ -230,6 +257,8 @@ if (loginFormElement) {
 // Initial check on load
 document.addEventListener('DOMContentLoaded', () => {
     updateUI();
+    setupDirectAddButtons();
+    updateCartCount(); // explicit call
 });
 
 // Customization Modal Logic
@@ -240,12 +269,28 @@ const btnMinus = document.getElementById('btnMinus');
 const btnPlus = document.getElementById('btnPlus');
 const addToOrderBtn = document.getElementById('addToOrderBtn');
 const custProductTitle = document.getElementById('custProductTitle');
+const custTotalSpan = document.getElementById('custTotal'); // New
 
 // We will store the current product details here
 let currentProduct = {};
 
+function updateCustTotal() {
+    if (!currentProduct.price) return;
+    
+    let extraCost = 0;
+    document.querySelectorAll('.extra-item').forEach(item => {
+        const qty = parseInt(item.querySelector('.qty-val-small').textContent);
+        const EXTRA_PRICE = 2.00;
+        extraCost += (qty * EXTRA_PRICE);
+    });
+    
+    const total = currentProduct.price + extraCost;
+    if(custTotalSpan) {
+        custTotalSpan.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+}
+
 // Open Customization Modal
-// This function will be called by the onclick attribute we inject
 window.openCustomizeModal = function(element) {
     if (!custModal) return;
     
@@ -261,14 +306,30 @@ window.openCustomizeModal = function(element) {
     // Find product info from the card
     const card = element.closest('.card');
     const title = card.querySelector('h2').innerText;
+    // Extract price from card text: "Preço: R$ 25,00"
+    const priceText = card.querySelector('p:not(.class)').innerText; 
+    let price = 0;
+    const ps = card.querySelectorAll('p');
+    ps.forEach(p => {
+        if(p.innerText.includes('Preço:')) {
+            const match = p.innerText.match(/R\$\s*([\d,]+)/);
+            if(match) {
+                price = parseFloat(match[1].replace(',', '.'));
+            }
+        }
+    });
     
     currentProduct = {
         name: title,
         quantity: 1,
+        price: price, // Base price
         extras: []
     };
     
     if(custProductTitle) custProductTitle.innerText = title;
+    
+    updateCustTotal(); // Initial update
+    
     custModal.style.display = 'flex';
 };
 
@@ -277,12 +338,6 @@ if (custClose) {
         custModal.style.display = 'none';
     };
 }
-
-window.addEventListener('click', (event) => {
-    if (event.target == custModal) {
-        custModal.style.display = 'none';
-    }
-});
 
 // Logic for Extra Items (Individual Quantities)
 document.querySelectorAll('.extra-item').forEach(item => {
@@ -296,6 +351,7 @@ document.querySelectorAll('.extra-item').forEach(item => {
              if (val > 0) {
                  val--;
                  valSpan.textContent = val;
+                 updateCustTotal(); // Update on change
              }
         };
         
@@ -303,32 +359,71 @@ document.querySelectorAll('.extra-item').forEach(item => {
              let val = parseInt(valSpan.textContent);
              val++;
              valSpan.textContent = val;
+             updateCustTotal(); // Update on change
         };
     }
 });
 
-// Add to Order Logic
+// Add to Order Logic (From customization modal)
 if (addToOrderBtn) {
     addToOrderBtn.addEventListener('click', () => {
         // Collect extras
         const extras = [];
+        let extraCost = 0;
         document.querySelectorAll('.extra-item').forEach(item => {
             const name = item.getAttribute('data-name');
             const qty = parseInt(item.querySelector('.qty-val-small').textContent);
+            // Assuming extras cost R$ 2.00 each for simplicity since it's not in HTML
+            const EXTRA_PRICE = 2.00;
+            
             if (qty > 0) {
                 extras.push(`${name} (x${qty})`);
+                extraCost += (qty * EXTRA_PRICE);
             }
         });
         
         currentProduct.extras = extras;
-        currentProduct.quantity = 1; // Default to 1 since we removed the selector
+        currentProduct.totalPrice = currentProduct.price + extraCost;
         
-        // Simulating Add to Cart
-        alert('Adicionado ao pedido:\n' + currentProduct.name + '\nQtd: ' + currentProduct.quantity + '\nExtras: ' + (extras.join(', ') || 'Nenhum'));
+        addToCart(currentProduct);
         
         custModal.style.display = 'none';
     });
 }
+
+// Logic for Direct "Add to Cart" buttons (non-customizable items)
+function setupDirectAddButtons() {
+    // Select buttons that are NOT the "Adicionar" inside the modal and NOT the "Calcular"
+    document.querySelectorAll('.card button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const card = e.target.closest('.card');
+            const title = card.querySelector('h2').innerText;
+            
+            // Extract Price
+            let price = 0;
+            const ps = card.querySelectorAll('p');
+            ps.forEach(p => {
+                if(p.innerText.includes('Preço:')) {
+                    const match = p.innerText.match(/R\$\s*([\d,]+)/);
+                    if(match) {
+                        price = parseFloat(match[1].replace(',', '.'));
+                    }
+                }
+            });
+
+            const product = {
+                name: title,
+                quantity: 1,
+                price: price,
+                totalPrice: price,
+                extras: []
+            };
+
+            addToCart(product);
+        });
+    });
+}
+
 
 // Coupon Modal Logic
 const couponModal = document.getElementById('couponModal');
@@ -337,9 +432,8 @@ const closeCouponBtn = document.getElementById('closeCoupon');
 const applyCouponBtn = document.getElementById('applyCouponBtn');
 const couponCodeInput = document.getElementById('couponCode');
 const couponMessage = document.getElementById('couponMessage');
-const closeCouponIcon = document.getElementById('closeCouponIcon'); // NEW: For the button I will add
+const closeCouponIcon = document.getElementById('closeCouponIcon'); 
 
-// Valid Coupons (Mock)
 const VALID_COUPONS = ['MAGOS10', 'WELCOME', 'BURGER2025'];
 
 if (openCouponBtn && couponModal) {
@@ -362,12 +456,6 @@ if (closeCouponIcon) {
    closeCouponIcon.addEventListener('click', closeCoupon);
 }
 
-window.addEventListener('click', (event) => {
-    if (event.target == couponModal) {
-        couponModal.style.display = 'none';
-    }
-});
-
 if (applyCouponBtn && couponCodeInput && couponMessage) {
     applyCouponBtn.addEventListener('click', () => {
         const code = couponCodeInput.value.trim().toUpperCase();
@@ -380,10 +468,179 @@ if (applyCouponBtn && couponCodeInput && couponMessage) {
         
         if (VALID_COUPONS.includes(code)) {
             couponMessage.textContent = 'Cupom válido! Desconto aplicado.';
-            couponMessage.style.color = '#28a745'; // Green
+            couponMessage.style.color = '#28a745'; 
+            // Save coupon state if needed
         } else {
             couponMessage.textContent = 'Cupom inválido ou expirado.';
-            couponMessage.style.color = '#dc3545'; // Red
+            couponMessage.style.color = '#dc3545';
         }
     });
 }
+
+// Cart Modal Logic
+const cartModal = document.getElementById('cartModal');
+const openCartBtn = document.getElementById('openCartBtn');
+const closeCartBtn = document.getElementById('closeCart');
+const cartItemsContainer = document.getElementById('cartItems');
+const cartTotalSpan = document.getElementById('cartTotal');
+const checkoutBtn = document.getElementById('checkoutBtn');
+
+function renderCart() {
+    const cart = getCart();
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p style="text-align:center; color: #aaa;">Seu carrinho está vazio.</p>';
+        cartTotalSpan.textContent = 'R$ 0,00';
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        total += item.totalPrice;
+        
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        itemDiv.innerHTML = `
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>${item.extras.join(', ')}</p>
+            </div>
+            <div class="cart-item-actions">
+                <span class="cart-price">R$ ${item.totalPrice.toFixed(2).replace('.', ',')}</span>
+                <button class="remove-item-btn" onclick="removeCartItem(${index})">Remover</button>
+            </div>
+        `;
+        cartItemsContainer.appendChild(itemDiv);
+    });
+
+    cartTotalSpan.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+}
+
+window.removeCartItem = function(index) {
+    const cart = getCart();
+    cart.splice(index, 1);
+    saveCart(cart);
+    renderCart();
+    updateCartCount(); // update count on remove
+};
+
+if (openCartBtn && cartModal) {
+    openCartBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        cartModal.style.display = 'flex';
+        renderCart();
+    });
+}
+
+if (closeCartBtn) {
+    closeCartBtn.addEventListener('click', () => {
+        cartModal.style.display = 'none';
+    });
+}
+
+const paymentModal = document.getElementById('paymentModal');
+const closePaymentBtn = document.getElementById('closePayment');
+const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
+const cashChangeContainer = document.getElementById('cashChangeContainer');
+const pixContainer = document.getElementById('pixContainer');
+const cardContainer = document.getElementById('cardContainer');
+const changeInput = document.getElementById('changeInput');
+const paymentOptions = document.getElementsByName('paymentMethod');
+
+// Handle Payment Selection
+paymentOptions.forEach(option => {
+    option.addEventListener('change', (e) => {
+        const val = e.target.value;
+        
+        // Hide all first
+        if(cashChangeContainer) cashChangeContainer.style.display = 'none';
+        if(pixContainer) pixContainer.style.display = 'none';
+        if(cardContainer) cardContainer.style.display = 'none';
+        
+        if (val === 'Dinheiro') {
+            if(cashChangeContainer) cashChangeContainer.style.display = 'block';
+        } else if (val === 'Pix') {
+            if(pixContainer) pixContainer.style.display = 'block';
+        } else if (val.includes('Cartão')) {
+            if(cardContainer) cardContainer.style.display = 'block';
+        }
+    });
+});
+
+if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+        const cart = getCart();
+        if(cart.length === 0) {
+            alert('Seu carrinho está vazio!');
+            return;
+        }
+        
+        // Open Payment Modal instead of direct confirm
+        cartModal.style.display = 'none';
+        paymentModal.style.display = 'flex';
+        
+        // Reset view (optional: select nothing or default)
+        paymentOptions.forEach(opt => opt.checked = false);
+        if(cashChangeContainer) cashChangeContainer.style.display = 'none';
+        if(pixContainer) pixContainer.style.display = 'none';
+        if(cardContainer) cardContainer.style.display = 'none';
+    });
+}
+
+if (closePaymentBtn) {
+    closePaymentBtn.addEventListener('click', () => {
+        paymentModal.style.display = 'none';
+    });
+}
+
+if (confirmPaymentBtn) {
+    confirmPaymentBtn.addEventListener('click', () => {
+        let selectedPayment = null;
+        for (const option of paymentOptions) {
+             if (option.checked) {
+                 selectedPayment = option.value;
+                 break;
+             }
+        }
+        
+        if (!selectedPayment) {
+            alert('Por favor, selecione uma forma de pagamento.');
+            return;
+        }
+        
+        let message = `Pedido confirmado!\nForma de Pagamento: ${selectedPayment}`;
+        
+        if (selectedPayment === 'Dinheiro') {
+            const change = changeInput.value;
+            if (change) {
+                message += `\nTroco para: R$ ${change}`;
+            } else {
+                 message += `\nSem troco.`;
+            }
+        }
+        
+        alert(message + '\nObrigado pela preferência!');
+        
+        // Clear Cart
+        saveCart([]); 
+        renderCart(); 
+        updateCartCount();
+        paymentModal.style.display = 'none';
+    });
+}
+
+window.addEventListener('click', (event) => {
+    if (event.target == cartModal) {
+        cartModal.style.display = 'none';
+    }
+    if (event.target == custModal) {
+        custModal.style.display = 'none';
+    }
+    if (event.target == couponModal) {
+        couponModal.style.display = 'none';
+    }
+    if (event.target == paymentModal) {
+        paymentModal.style.display = 'none';
+    }
+});
