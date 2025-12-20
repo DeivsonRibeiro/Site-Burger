@@ -674,6 +674,8 @@
 
       <div class="footer-bottom">
         © 2025 MagosBurger | Todos os direitos reservados.
+        <br>
+        <a href="admin_pedidos.html" style="color: #333; font-size: 0.7rem; text-decoration: none;">Acesso Administrativo</a>
       </div>
     </footer>
     <!-- Modal de Login/Cadastro -->
@@ -1075,6 +1077,17 @@
         >
           Confirmar Pedido
         </button>
+      </div>
+    </div>
+    <!-- Modal de Confirmação -->
+    <div id="confirmModal" class="modal">
+      <div class="modal-content">
+        <h3 id="confirmTitle">Confirmação</h3>
+        <p id="confirmMessage">Tem certeza?</p>
+        <div class="confirm-actions">
+          <button id="confirmBtnYes" class="confirm-btn yes">Sim</button>
+          <button id="confirmBtnNo" class="confirm-btn no">Não</button>
+        </div>
       </div>
     </div>
     <script src="javascript/scriprt.js"></script>

@@ -116,7 +116,7 @@ function setCurrentUser(user) {
 function logoutUser() {
     localStorage.removeItem(SESSION_KEY);
     updateUI();
-    alert('Você saiu da sua conta.');
+    showToast('Você saiu da sua conta.', 'info');
 }
 
 // Helper: Get Cart
@@ -131,12 +131,28 @@ function saveCart(cart) {
 }
 
 // Helper: Add to Cart
-function addToCart(product) {
+async function addToCart(product) {
     const cart = getCart();
     cart.push(product);
     saveCart(cart);
     updateCartCount(); // Update count
-    alert('Produto adicionado ao carrinho!');
+
+    const goToCart = await showConfirm(
+        'Produto adicionado! O que deseja fazer?', 
+        'Finalizar Pedido', 
+        'Continuar Comprando'
+    );
+    
+    if (goToCart) {
+        // Open Cart Modal
+        const cartModal = document.getElementById('cartModal');
+        if (cartModal) {
+            cartModal.style.display = 'flex';
+            renderCart();
+        }
+    } else {
+        showToast('Produto adicionado ao carrinho! Continue aproveitando.', 'success');
+    }
 }
 
 function updateCartCount() {
@@ -165,9 +181,10 @@ function updateUI() {
         loginBtnLink.parentNode.replaceChild(newBtn, loginBtnLink);
 
         // Add Logout listener
-        newBtn.addEventListener('click', (e) => {
+        newBtn.addEventListener('click', async (e) => {
             e.preventDefault();
-            if(confirm(`Olá ${user.name}, deseja sair da sua conta?`)) {
+            const confirmed = await showConfirm(`Olá ${user.name}, deseja sair da sua conta?`);
+            if(confirmed) {
                 logoutUser();
             }
         });
@@ -204,7 +221,7 @@ if (regFormElement) {
         const passwordConfirm = document.getElementById('regPasswordConfirm').value;
 
         if (password !== passwordConfirm) {
-            alert('As senhas não coincidem!');
+            showToast('As senhas não coincidem!', 'error');
             return;
         }
 
@@ -212,18 +229,23 @@ if (regFormElement) {
         
         // Check if email already exists
         if (users.some(u => u.email === email)) {
-            alert('Este e-mail já está cadastrado.');
+            showToast('Este e-mail já está cadastrado.', 'error');
             return;
         }
 
-        const newUser = { name, email, password };
+        const newUser = { 
+            name, 
+            email, 
+            password,
+            joinedAt: new Date().toLocaleString('pt-BR')
+        };
         users.push(newUser);
         saveUsers(users);
 
         // Auto-login
         setCurrentUser(newUser);
         
-        alert('Cadastro realizado com sucesso!');
+        showToast('Cadastro realizado com sucesso!', 'success');
         document.getElementById('authModal').style.display = 'none';
         regFormElement.reset();
         updateUI();
@@ -244,12 +266,12 @@ if (loginFormElement) {
 
         if (user) {
             setCurrentUser(user);
-            alert(`Bem-vindo de volta, ${user.name}!`);
+            showToast(`Bem-vindo de volta, ${user.name}!`, 'success');
             document.getElementById('authModal').style.display = 'none';
             loginFormElement.reset();
             updateUI(); // Refresh UI
         } else {
-            alert('E-mail ou senha incorretos.');
+            showToast('E-mail ou senha incorretos.', 'error');
         }
     });
 }
@@ -572,7 +594,7 @@ if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
         const cart = getCart();
         if(cart.length === 0) {
-            alert('Seu carrinho está vazio!');
+            showToast('Seu carrinho está vazio!', 'error');
             return;
         }
         
@@ -605,7 +627,7 @@ if (confirmPaymentBtn) {
         }
         
         if (!selectedPayment) {
-            alert('Por favor, selecione uma forma de pagamento.');
+            showToast('Por favor, selecione uma forma de pagamento.', 'error');
             return;
         }
         
@@ -620,7 +642,24 @@ if (confirmPaymentBtn) {
             }
         }
         
-        alert(message + '\nObrigado pela preferência!');
+        // Create Order Object
+        const currentUser = getCurrentUser();
+        const order = {
+            id: Date.now(),
+            date: new Date().toLocaleString('pt-BR'),
+            customer: currentUser ? currentUser.name : 'Convidado',
+            items: getCart(),
+            total: getCart().reduce((acc, item) => acc + item.totalPrice, 0),
+            paymentMethod: selectedPayment,
+            change: (selectedPayment === 'Dinheiro' && changeInput.value) ? changeInput.value : null
+        };
+
+        // Save to 'Database' (localStorage)
+        const orders = JSON.parse(localStorage.getItem('magosBurgerOrders') || '[]');
+        orders.push(order);
+        localStorage.setItem('magosBurgerOrders', JSON.stringify(orders));
+
+        showToast(message + '\nObrigado pela preferência!', 'success');
         
         // Clear Cart
         saveCart([]); 
@@ -644,3 +683,74 @@ window.addEventListener('click', (event) => {
         paymentModal.style.display = 'none';
     }
 });
+
+// Modern Toast Notification
+function showToast(message, type = 'info') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    let icon = '🔔';
+    if (type === 'success') {
+        icon = '✅';
+    } else if (type === 'error') {
+        icon = '❌';
+    }
+    
+    // allow multiline
+    const formattedMessage = message.replace(/\n/g, '<br>');
+
+    toast.innerHTML = `
+        <span class="toast-icon">${icon}</span>
+        <span>${formattedMessage}</span>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 4500);
+}
+
+// Modern Confirmation Modal logic
+function showConfirm(message, yesText = 'Sim', noText = 'Não') {
+    return new Promise((resolve) => {
+        const modal = document.getElementById('confirmModal');
+        const msgElem = document.getElementById('confirmMessage');
+        const btnYes = document.getElementById('confirmBtnYes');
+        const btnNo = document.getElementById('confirmBtnNo');
+        
+        if(!modal) {
+             return resolve(window.confirm(message)); 
+        }
+
+        msgElem.textContent = message;
+        btnYes.textContent = yesText;
+        btnNo.textContent = noText;
+        modal.style.display = 'flex';
+
+        const close = () => {
+            modal.style.display = 'none';
+        };
+
+        const onYes = () => {
+            resolve(true);
+            close();
+        };
+
+        const onNo = () => {
+            resolve(false);
+            close();
+        };
+
+        // Use {once: true} to avoid stacking listeners
+        btnYes.addEventListener('click', onYes, {once: true});
+        btnNo.addEventListener('click', onNo, {once: true});
+    });
+}
