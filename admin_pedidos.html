@@ -36,7 +36,7 @@
         border: none;
         margin-bottom: 0.5rem;
       }
-      
+
       /* Dashboard Stats */
       .stats-grid {
         display: grid;
@@ -50,7 +50,7 @@
         border-radius: 12px;
         border: 1px solid #333;
         text-align: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       }
       .stat-card h3 {
         color: #aaa;
@@ -112,7 +112,8 @@
         border: 1px solid #333;
       }
 
-      th, td {
+      th,
+      td {
         padding: 1.2rem;
         text-align: left;
         border-bottom: 1px solid #333;
@@ -134,7 +135,7 @@
         color: var(--success);
         font-weight: bold;
       }
-      
+
       .no-orders {
         text-align: center;
         padding: 4rem;
@@ -144,7 +145,7 @@
         border-radius: 12px;
         border: 1px dashed #444;
       }
-      
+
       .actions-cell button {
         background-color: rgba(220, 53, 69, 0.1);
         color: #dc3545;
@@ -176,7 +177,10 @@
       /* Password protection screen */
       #auth-screen {
         position: fixed;
-        top:0; left:0; width:100%; height:100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background: var(--bg-dark);
         display: flex;
         justify-content: center;
@@ -191,7 +195,7 @@
         text-align: center;
         width: 100%;
         max-width: 400px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       }
       .auth-card input {
         width: 100%;
@@ -216,12 +220,38 @@
       }
 
       @media (max-width: 768px) {
+        h1 {
+          font-size: 1.8rem;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
         .admin-actions {
           flex-direction: column;
           align-items: stretch;
         }
         .search-box input {
           width: 100%;
+        }
+        .admin-tabs {
+          flex-direction: column;
+          gap: 0 !important;
+        }
+        .admin-tabs button {
+          border-radius: 8px 8px 0 0 !important;
+          margin-bottom: 5px;
+        }
+      }
+      @media (max-width: 480px) {
+        th,
+        td {
+          padding: 0.8rem;
+          font-size: 0.8rem;
+        }
+        .actions-cell button {
+          padding: 0.3rem 0.5rem;
+          font-size: 0.75rem;
         }
       }
     </style>
@@ -231,21 +261,45 @@
     <div id="auth-screen">
       <div class="auth-card">
         <h1 class="logo">Acesso Restrito</h1>
-        <p style="color: #888;">Digite a senha de administrador</p>
-        <input type="password" id="adminPass" placeholder="••••••••" autofocus>
+        <p style="color: #888">Digite a senha de administrador</p>
+        <input
+          type="password"
+          id="adminPass"
+          placeholder="••••••••"
+          autofocus
+        />
         <button id="loginBtn">Entrar</button>
-        <p id="errorMsg" style="color: var(--primary); margin-top: 1rem; font-size: 0.9rem; display: none;">Senha incorreta!</p>
-        <a href="index.html" style="display: block; margin-top: 1.5rem; color: #555; text-decoration: none;">Voltar ao site</a>
+        <p
+          id="errorMsg"
+          style="
+            color: var(--primary);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none;
+          "
+        >
+          Senha incorreta!
+        </p>
+        <a
+          href="index.html"
+          style="
+            display: block;
+            margin-top: 1.5rem;
+            color: #555;
+            text-decoration: none;
+          "
+          >Voltar ao site</a
+        >
       </div>
     </div>
 
     <!-- MAIN ADMIN CONTENT -->
     <div class="admin-container">
       <a href="index.html" class="back-link">&larr; Voltar para o Site</a>
-      
+
       <header class="admin-header">
-         <h1 class="logo">Painel de Pedidos</h1>
-         <p style="color: #666;">Gerenciamento interno MagosBurger</p>
+        <h1 class="logo">Painel de Pedidos</h1>
+        <p style="color: #666">Gerenciamento interno MagosBurger</p>
       </header>
 
       <!-- Dashboard Stats -->
@@ -263,25 +317,57 @@
           <p id="statTotalRevenue" class="value-success">R$ 0,00</p>
         </div>
       </div>
-      
+
       <!-- Admin Tabs -->
-      <div class="admin-tabs" style="display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid #333;">
-        <button id="tabOrders" class="btn-clear" style="border-radius: 8px 8px 0 0; background-color: var(--primary);">Pedidos</button>
-        <button id="tabUsers" class="btn-clear" style="border-radius: 8px 8px 0 0; background-color: transparent;">Clientes Registrados</button>
+      <div
+        class="admin-tabs"
+        style="
+          display: flex;
+          gap: 1rem;
+          margin-bottom: 2rem;
+          border-bottom: 1px solid #333;
+        "
+      >
+        <button
+          id="tabOrders"
+          class="btn-clear"
+          style="border-radius: 8px 8px 0 0; background-color: var(--primary)"
+        >
+          Pedidos
+        </button>
+        <button
+          id="tabUsers"
+          class="btn-clear"
+          style="border-radius: 8px 8px 0 0; background-color: transparent"
+        >
+          Clientes Registrados
+        </button>
       </div>
 
       <!-- Section: Pedidos -->
       <div id="sectionOrders">
         <div class="admin-actions">
           <div class="search-box">
-            <input type="text" id="orderSearch" placeholder="Buscar por cliente ou item...">
+            <input
+              type="text"
+              id="orderSearch"
+              placeholder="Buscar por cliente ou item..."
+            />
           </div>
-          <div style="display: flex; gap: 1rem;">
-            <button id="btnExport" class="btn-clear" style="background-color: var(--success);">Exportar CSV</button>
-            <button id="btnClearAll" class="btn-clear">Limpar Todo o Histórico</button>
+          <div style="display: flex; gap: 1rem">
+            <button
+              id="btnExport"
+              class="btn-clear"
+              style="background-color: var(--success)"
+            >
+              Exportar CSV
+            </button>
+            <button id="btnClearAll" class="btn-clear">
+              Limpar Todo o Histórico
+            </button>
           </div>
         </div>
-        
+
         <div class="table-responsive">
           <table id="ordersTable">
             <thead>
@@ -297,14 +383,20 @@
             <tbody></tbody>
           </table>
         </div>
-        <div id="noOrdersMsg" class="no-orders" style="display: none;">Não há pedidos registrados.</div>
+        <div id="noOrdersMsg" class="no-orders" style="display: none">
+          Não há pedidos registrados.
+        </div>
       </div>
 
       <!-- Section: Clientes -->
-      <div id="sectionUsers" style="display: none;">
+      <div id="sectionUsers" style="display: none">
         <div class="admin-actions">
           <div class="search-box">
-            <input type="text" id="userSearch" placeholder="Buscar por nome ou e-mail...">
+            <input
+              type="text"
+              id="userSearch"
+              placeholder="Buscar por nome ou e-mail..."
+            />
           </div>
         </div>
         <div class="table-responsive">
@@ -320,180 +412,215 @@
             <tbody></tbody>
           </table>
         </div>
-        <div id="noUsersMsg" class="no-orders" style="display: none;">Nenhum cliente cadastrado.</div>
+        <div id="noUsersMsg" class="no-orders" style="display: none">
+          Nenhum cliente cadastrado.
+        </div>
       </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const ordersTableBody = document.querySelector('#ordersTable tbody');
-            const usersTableBody = document.querySelector('#usersTable tbody');
-            const noOrdersMsg = document.getElementById('noOrdersMsg');
-            const noUsersMsg = document.getElementById('noUsersMsg');
-            
-            // TABS LOGIC
-            const btnTabOrders = document.getElementById('tabOrders');
-            const btnTabUsers = document.getElementById('tabUsers');
-            const sectionOrders = document.getElementById('sectionOrders');
-            const sectionUsers = document.getElementById('sectionUsers');
+      document.addEventListener("DOMContentLoaded", () => {
+        const ordersTableBody = document.querySelector("#ordersTable tbody");
+        const usersTableBody = document.querySelector("#usersTable tbody");
+        const noOrdersMsg = document.getElementById("noOrdersMsg");
+        const noUsersMsg = document.getElementById("noUsersMsg");
 
-            btnTabOrders.onclick = () => {
-                btnTabOrders.style.backgroundColor = 'var(--primary)';
-                btnTabUsers.style.backgroundColor = 'transparent';
-                sectionOrders.style.display = 'block';
-                sectionUsers.style.display = 'none';
-                loadOrders();
-            };
+        // TABS LOGIC
+        const btnTabOrders = document.getElementById("tabOrders");
+        const btnTabUsers = document.getElementById("tabUsers");
+        const sectionOrders = document.getElementById("sectionOrders");
+        const sectionUsers = document.getElementById("sectionUsers");
 
-            btnTabUsers.onclick = () => {
-                btnTabUsers.style.backgroundColor = 'var(--primary)';
-                btnTabOrders.style.backgroundColor = 'transparent';
-                sectionUsers.style.display = 'block';
-                sectionOrders.style.display = 'none';
-                loadUsers();
-            };
+        btnTabOrders.onclick = () => {
+          btnTabOrders.style.backgroundColor = "var(--primary)";
+          btnTabUsers.style.backgroundColor = "transparent";
+          sectionOrders.style.display = "block";
+          sectionUsers.style.display = "none";
+          loadOrders();
+        };
 
-            // ADMIN LOGIN LOGIC
-            const ADMIN_PASSWORD = "admin123";
-            const loginBtn = document.getElementById('loginBtn');
-            const authScreen = document.getElementById('auth-screen');
-            const adminPass = document.getElementById('adminPass');
+        btnTabUsers.onclick = () => {
+          btnTabUsers.style.backgroundColor = "var(--primary)";
+          btnTabOrders.style.backgroundColor = "transparent";
+          sectionUsers.style.display = "block";
+          sectionOrders.style.display = "none";
+          loadUsers();
+        };
 
-            function checkAuth() {
-                if (sessionStorage.getItem('adminAuthed') === 'true') {
-                    authScreen.style.display = 'none';
-                    document.querySelector('.admin-container').style.display = 'block';
-                    loadOrders();
-                    updateGlobalStats();
-                }
-            }
-            checkAuth();
+        // ADMIN LOGIN LOGIC
+        const ADMIN_PASSWORD = "admin123";
+        const loginBtn = document.getElementById("loginBtn");
+        const authScreen = document.getElementById("auth-screen");
+        const adminPass = document.getElementById("adminPass");
 
-            loginBtn.onclick = () => {
-                if (adminPass.value === ADMIN_PASSWORD) {
-                    sessionStorage.setItem('adminAuthed', 'true');
-                    authScreen.style.display = 'none';
-                    document.querySelector('.admin-container').style.display = 'block';
-                    loadOrders();
-                    updateGlobalStats();
-                } else {
-                    document.getElementById('errorMsg').style.display = 'block';
-                    adminPass.value = '';
-                }
-            };
-            
-            adminPass.onkeypress = (e) => { if(e.key === 'Enter') loginBtn.click(); };
+        function checkAuth() {
+          if (sessionStorage.getItem("adminAuthed") === "true") {
+            authScreen.style.display = "none";
+            document.querySelector(".admin-container").style.display = "block";
+            loadOrders();
+            updateGlobalStats();
+          }
+        }
+        checkAuth();
 
-            function updateGlobalStats() {
-                const orders = JSON.parse(localStorage.getItem('magosBurgerOrders') || '[]');
-                const users = JSON.parse(localStorage.getItem('magosBurgerUsers') || '[]');
-                const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+        loginBtn.onclick = () => {
+          if (adminPass.value === ADMIN_PASSWORD) {
+            sessionStorage.setItem("adminAuthed", "true");
+            authScreen.style.display = "none";
+            document.querySelector(".admin-container").style.display = "block";
+            loadOrders();
+            updateGlobalStats();
+          } else {
+            document.getElementById("errorMsg").style.display = "block";
+            adminPass.value = "";
+          }
+        };
 
-                document.getElementById('statTotalOrders').textContent = orders.length;
-                document.getElementById('statTotalUsers').textContent = users.length;
-                document.getElementById('statTotalRevenue').textContent = `R$ ${totalRevenue.toFixed(2).replace('.', ',')}`;
-            }
+        adminPass.onkeypress = (e) => {
+          if (e.key === "Enter") loginBtn.click();
+        };
 
-            function loadOrders(filter = '') {
-                const orders = JSON.parse(localStorage.getItem('magosBurgerOrders') || '[]');
-                const filtered = orders.filter(o => 
-                    o.customer.toLowerCase().includes(filter.toLowerCase()) || 
-                    o.id.toString().includes(filter)
-                );
-                
-                ordersTableBody.innerHTML = '';
-                if (filtered.length === 0) {
-                    noOrdersMsg.style.display = 'block';
-                    document.getElementById('ordersTable').style.display = 'none';
-                } else {
-                    noOrdersMsg.style.display = 'none';
-                    document.getElementById('ordersTable').style.display = 'table';
-                    filtered.sort((a,b) => b.id - a.id).forEach(o => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `
+        function updateGlobalStats() {
+          const orders = JSON.parse(
+            localStorage.getItem("magosBurgerOrders") || "[]"
+          );
+          const users = JSON.parse(
+            localStorage.getItem("magosBurgerUsers") || "[]"
+          );
+          const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+
+          document.getElementById("statTotalOrders").textContent =
+            orders.length;
+          document.getElementById("statTotalUsers").textContent = users.length;
+          document.getElementById(
+            "statTotalRevenue"
+          ).textContent = `R$ ${totalRevenue.toFixed(2).replace(".", ",")}`;
+        }
+
+        function loadOrders(filter = "") {
+          const orders = JSON.parse(
+            localStorage.getItem("magosBurgerOrders") || "[]"
+          );
+          const filtered = orders.filter(
+            (o) =>
+              o.customer.toLowerCase().includes(filter.toLowerCase()) ||
+              o.id.toString().includes(filter)
+          );
+
+          ordersTableBody.innerHTML = "";
+          if (filtered.length === 0) {
+            noOrdersMsg.style.display = "block";
+            document.getElementById("ordersTable").style.display = "none";
+          } else {
+            noOrdersMsg.style.display = "none";
+            document.getElementById("ordersTable").style.display = "table";
+            filtered
+              .sort((a, b) => b.id - a.id)
+              .forEach((o) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
                             <td>#${o.id.toString().slice(-6)}</td>
                             <td>${o.date}</td>
                             <td>${o.customer}</td>
-                            <td class="price-cell">R$ ${o.total.toFixed(2).replace('.', ',')}</td>
+                            <td class="price-cell">R$ ${o.total
+                              .toFixed(2)
+                              .replace(".", ",")}</td>
                             <td>${o.paymentMethod}</td>
-                            <td class="actions-cell"><button onclick="deleteOrder(${o.id})">Excluir</button></td>
+                            <td class="actions-cell"><button onclick="deleteOrder(${
+                              o.id
+                            })">Excluir</button></td>
                         `;
-                        ordersTableBody.appendChild(tr);
-                    });
-                }
-                updateGlobalStats();
-            }
+                ordersTableBody.appendChild(tr);
+              });
+          }
+          updateGlobalStats();
+        }
 
-            function loadUsers(filter = '') {
-                const users = JSON.parse(localStorage.getItem('magosBurgerUsers') || '[]');
-                const filtered = users.filter(u => 
-                    u.name.toLowerCase().includes(filter.toLowerCase()) || 
-                    u.email.toLowerCase().includes(filter.toLowerCase())
-                );
+        function loadUsers(filter = "") {
+          const users = JSON.parse(
+            localStorage.getItem("magosBurgerUsers") || "[]"
+          );
+          const filtered = users.filter(
+            (u) =>
+              u.name.toLowerCase().includes(filter.toLowerCase()) ||
+              u.email.toLowerCase().includes(filter.toLowerCase())
+          );
 
-                usersTableBody.innerHTML = '';
-                if (filtered.length === 0) {
-                    noUsersMsg.style.display = 'block';
-                    document.getElementById('usersTable').style.display = 'none';
-                } else {
-                    noUsersMsg.style.display = 'none';
-                    document.getElementById('usersTable').style.display = 'table';
-                    filtered.forEach((u, index) => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `
+          usersTableBody.innerHTML = "";
+          if (filtered.length === 0) {
+            noUsersMsg.style.display = "block";
+            document.getElementById("usersTable").style.display = "none";
+          } else {
+            noUsersMsg.style.display = "none";
+            document.getElementById("usersTable").style.display = "table";
+            filtered.forEach((u, index) => {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
                             <td>${u.name}</td>
                             <td>${u.email}</td>
-                            <td>${u.joinedAt || 'Antigo'}</td>
-                            <td class="actions-cell"><button onclick="deleteUser('${u.email}')">Remover</button></td>
+                            <td>${u.joinedAt || "Antigo"}</td>
+                            <td class="actions-cell"><button onclick="deleteUser('${
+                              u.email
+                            }')">Remover</button></td>
                         `;
-                        usersTableBody.appendChild(tr);
-                    });
-                }
-                updateGlobalStats();
-            }
+              usersTableBody.appendChild(tr);
+            });
+          }
+          updateGlobalStats();
+        }
 
-            // SEARCH LISTENERS
-            document.getElementById('orderSearch').oninput = (e) => loadOrders(e.target.value);
-            document.getElementById('userSearch').oninput = (e) => loadUsers(e.target.value);
+        // SEARCH LISTENERS
+        document.getElementById("orderSearch").oninput = (e) =>
+          loadOrders(e.target.value);
+        document.getElementById("userSearch").oninput = (e) =>
+          loadUsers(e.target.value);
 
-            // BUTTON CLICKS
-            document.getElementById('btnExport').onclick = () => {
-                const orders = JSON.parse(localStorage.getItem('magosBurgerOrders') || '[]');
-                let csv = 'ID;Data;Cliente;Total\n';
-                orders.forEach(o => csv += `${o.id};${o.date};${o.customer};${o.total}\n`);
-                const blob = new Blob([csv], { type: 'text/csv' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'pedidos.csv';
-                a.click();
-            };
+        // BUTTON CLICKS
+        document.getElementById("btnExport").onclick = () => {
+          const orders = JSON.parse(
+            localStorage.getItem("magosBurgerOrders") || "[]"
+          );
+          let csv = "ID;Data;Cliente;Total\n";
+          orders.forEach(
+            (o) => (csv += `${o.id};${o.date};${o.customer};${o.total}\n`)
+          );
+          const blob = new Blob([csv], { type: "text/csv" });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "pedidos.csv";
+          a.click();
+        };
 
-            document.getElementById('btnClearAll').onclick = () => {
-                if(confirm('Apagar todos os pedidos?')){
-                    localStorage.setItem('magosBurgerOrders', '[]');
-                    loadOrders();
-                }
-            };
+        document.getElementById("btnClearAll").onclick = () => {
+          if (confirm("Apagar todos os pedidos?")) {
+            localStorage.setItem("magosBurgerOrders", "[]");
+            loadOrders();
+          }
+        };
 
-            window.deleteOrder = (id) => {
-                if(confirm('Excluir pedido?')) {
-                    let orders = JSON.parse(localStorage.getItem('magosBurgerOrders') || '[]');
-                    orders = orders.filter(o => o.id !== id);
-                    localStorage.setItem('magosBurgerOrders', JSON.stringify(orders));
-                    loadOrders();
-                }
-            };
+        window.deleteOrder = (id) => {
+          if (confirm("Excluir pedido?")) {
+            let orders = JSON.parse(
+              localStorage.getItem("magosBurgerOrders") || "[]"
+            );
+            orders = orders.filter((o) => o.id !== id);
+            localStorage.setItem("magosBurgerOrders", JSON.stringify(orders));
+            loadOrders();
+          }
+        };
 
-            window.deleteUser = (email) => {
-                if(confirm('Remover este cliente da base de dados?')) {
-                    let users = JSON.parse(localStorage.getItem('magosBurgerUsers') || '[]');
-                    users = users.filter(u => u.email !== email);
-                    localStorage.setItem('magosBurgerUsers', JSON.stringify(users));
-                    loadUsers();
-                }
-            };
-        });
+        window.deleteUser = (email) => {
+          if (confirm("Remover este cliente da base de dados?")) {
+            let users = JSON.parse(
+              localStorage.getItem("magosBurgerUsers") || "[]"
+            );
+            users = users.filter((u) => u.email !== email);
+            localStorage.setItem("magosBurgerUsers", JSON.stringify(users));
+            loadUsers();
+          }
+        };
+      });
     </script>
   </body>
 </html>
