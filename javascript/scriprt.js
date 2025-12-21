@@ -31,6 +31,45 @@ if (calcularFreteBtn) {
   });
 }
 
+// Hamburger Menu Logic
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const sideMenu = document.getElementById('sideMenu');
+const sideMenuOverlay = document.getElementById('sideMenuOverlay');
+const closeSideMenu = document.getElementById('closeSideMenu');
+const sideOpenLogin = document.getElementById('sideOpenLogin');
+
+function toggleSideMenu() {
+    if (sideMenu && sideMenuOverlay && hamburgerBtn) {
+        hamburgerBtn.classList.toggle('active');
+        sideMenu.classList.toggle('active');
+        sideMenuOverlay.classList.toggle('active');
+    }
+}
+
+if (hamburgerBtn) {
+    hamburgerBtn.addEventListener('click', toggleSideMenu);
+}
+
+if (closeSideMenu) {
+    closeSideMenu.addEventListener('click', toggleSideMenu);
+}
+
+if (sideMenuOverlay) {
+    sideMenuOverlay.addEventListener('click', toggleSideMenu);
+}
+
+// Open login modal from side menu
+if (sideOpenLogin) {
+    sideOpenLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleSideMenu(); // Close side menu first
+        const authModal = document.getElementById('authModal');
+        if (authModal) {
+            authModal.style.display = 'flex';
+        }
+    });
+}
+
 
 // Modal Login/Cadastro Logic
 const modal = document.getElementById('authModal');
@@ -52,18 +91,22 @@ if (btn && modal) {
 }
 
 // Close modal
-if (span && modal) {
-  span.onclick = function() {
+const closeAuthBtn = document.getElementById('closeAuthModal');
+if (closeAuthBtn && modal) {
+  closeAuthBtn.onclick = function() {
     modal.style.display = 'none';
   }
 }
 
 // Close modal when clicking outside
-window.onclick = function(event) {
+window.addEventListener('click', (event) => {
   if (modal && event.target == modal) {
     modal.style.display = 'none';
   }
-}
+  if (sideMenuOverlay && event.target == sideMenuOverlay) {
+      toggleSideMenu();
+  }
+});
 
 // Switch tabs
 if (tabLogin && tabRegister && loginForm && registerForm) {
@@ -682,6 +725,7 @@ window.addEventListener('click', (event) => {
     if (event.target == paymentModal) {
         paymentModal.style.display = 'none';
     }
+    // O fechamento do sideMenuOverlay já está sendo tratado pelo listener comum acima
 });
 
 // Modern Toast Notification
