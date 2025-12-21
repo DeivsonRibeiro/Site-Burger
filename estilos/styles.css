@@ -142,6 +142,76 @@ ul {
   background-image: url("/imgs/carrinho-de-compras.png");
 }
 
+@media (max-width: 768px) {
+  header {
+    padding: 2rem 1rem;
+    min-height: auto;
+  }
+
+  .header-top {
+    display: grid;
+    grid-template-areas:
+      "hamb logo"
+      "nav nav";
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .menu-hamburguer-container {
+    grid-area: hamb;
+  }
+
+  h1.logo {
+    grid-area: logo;
+    text-align: left;
+    font-size: 1.3rem;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  nav {
+    grid-area: nav;
+    width: 100%;
+  }
+
+  .menu {
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .menu a {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  h1.logo {
+    font-size: 1.1rem;
+  }
+
+  .menu {
+    display: flex;
+    flex-wrap: nowrap; /* Keep them in line if possible */
+    overflow-x: auto; /* Allow scroll if they don't fit */
+    justify-content: flex-start;
+    padding-bottom: 5px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .menu::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for cleaner look */
+  }
+
+  .menu a {
+    flex: 0 0 auto;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.7rem;
+  }
+}
+
 .menu-hamburguer-container {
   display: flex;
   align-items: center;
