@@ -31,8 +31,20 @@ body {
 }
 
 header {
+  /*
+  Optimization:
+  - Original image: 7.8MB -> Optimized JPG: 157KB, WebP: 80KB
+  - Fallback JPG for older browsers
+  - WebP for modern browsers via image-set for faster loading
+  */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_optimized.jpg"); /* Fallback for older browsers */
+  background-image: -webkit-image-set(
+    url("/imgs/imagem_header.webp") 1x
+  ); /* For Safari */
+  background-image: image-set(
+    url("/imgs/imagem_header.webp") 1x
+  ); /* Standard */
   background-size: cover;
   background-position: center;
   color: #fff;
