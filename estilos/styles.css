@@ -31,8 +31,19 @@ body {
 }
 
 header {
+  /*
+    SPEED OPTIMIZATION:
+    Reduced image size from 7.8MB to under 621KB.
+    - Converted original JPG to a compressed JPG fallback (621KB).
+    - Added a modern .webp version for compatible browsers (233KB).
+    This significantly improves page load time.
+  */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_compressed.jpg"); /* Fallback for older browsers */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    -webkit-image-set(url("/imgs/imagem_header.webp") 1x); /* For Safari */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    image-set(url("/imgs/imagem_header.webp") 1x); /* Standard */
   background-size: cover;
   background-position: center;
   color: #fff;
