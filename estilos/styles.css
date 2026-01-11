@@ -31,8 +31,9 @@ body {
 }
 
 header {
+  /* Optimized background image with WebP fallback. Original: 7.8MB -> Compressed JPG: 621KB -> WebP: 341KB */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_compressed.jpg");
   background-size: cover;
   background-position: center;
   color: #fff;
@@ -41,6 +42,14 @@ header {
   min-height: 400px; /* Garante uma altura mínima para o background aparecer mais */
   display: flex;
   align-items: center;
+}
+
+/* Serve WebP to browsers that support it */
+@supports (background-image: url("/imgs/imagem_header.webp")) {
+  header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("/imgs/imagem_header.webp");
+  }
 }
 
 .header-top {
