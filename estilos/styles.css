@@ -31,8 +31,9 @@ body {
 }
 
 header {
+  /* ⚡ Bolt: Optimized background image from 7.8MB to 621KB */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_optimized.jpg");
   background-size: cover;
   background-position: center;
   color: #fff;
