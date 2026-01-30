@@ -31,8 +31,10 @@ body {
 }
 
 header {
+  /* The optimized JPG is the fallback for browsers that don't support WebP. */
+  /* Optimization: Reduced image size from 7.8MB to 621KB. */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_optimized.jpg");
   background-size: cover;
   background-position: center;
   color: #fff;
@@ -41,6 +43,15 @@ header {
   min-height: 400px; /* Garante uma altura mínima para o background aparecer mais */
   display: flex;
   align-items: center;
+}
+
+/* Serve the even smaller WebP image to browsers that support it. */
+/* Optimization: Further reduced image size from 621KB to 233KB. */
+@supports (background-image: url("/imgs/imagem_header.webp")) {
+  header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("/imgs/imagem_header.webp");
+  }
 }
 
 .header-top {
