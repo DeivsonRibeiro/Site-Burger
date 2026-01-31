@@ -1,0 +1,3 @@
+## 2024-05-16 - Reliable WebP detection in CSS
+**Learning:** Using `@supports (background-image: url("image.webp"))` is unreliable because it only checks if the browser understands the `url()` syntax and background property, not whether it can actually decode the WebP format. To correctly detect WebP support in CSS, use a minimal WebP data URI in the `@supports` check: `@supports (background-image: url("data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA=="))`.
+**Action:** Always use the WebP data URI method for feature detection in CSS to ensure fallbacks work correctly on browsers without WebP support (like older Safari or IE).
