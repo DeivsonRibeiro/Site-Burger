@@ -1,0 +1,3 @@
+## 2025-05-22 - Static Asset Performance Bottlenecks
+**Learning:** Found a 7.8MB image file named with a .jpg extension that was actually uncompressed, significantly impacting LCP. In static vanilla projects, developers often overlook asset optimization which becomes the primary bottleneck over code execution. Additionally, root-relative paths in CSS (`/imgs/...`) require a local web server for frontend verification as `file://` protocol fails to resolve them.
+**Action:** Always check file sizes of background images first in static sites. Use `python3 -m http.server` for local verification to ensure assets load correctly.
