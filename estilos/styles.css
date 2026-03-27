@@ -31,6 +31,7 @@ body {
 }
 
 header {
+  /* ⚡ Bolt: Optimized header image from 7.8MB to ~157KB (JPG) / ~80KB (WebP) */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("/imgs/imagem_header.jpg");
   background-size: cover;
@@ -41,6 +42,13 @@ header {
   min-height: 400px; /* Garante uma altura mínima para o background aparecer mais */
   display: flex;
   align-items: center;
+}
+
+@supports (background-image: url("data:image/webp;base64,UklGRhoAAABXRUJQVlA4TAYAAAAvAAAAAAfQAAH/AAAA")) {
+  header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("/imgs/imagem_header.webp");
+  }
 }
 
 .header-top {
