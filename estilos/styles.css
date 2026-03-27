@@ -31,8 +31,15 @@ body {
 }
 
 header {
+  /* Fallback for older browsers */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_optimized.jpg");
+
+  /* Modern browsers with WebP support */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    -webkit-image-set(url("/imgs/imagem_header.webp") 1x);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    image-set(url("/imgs/imagem_header.webp") 1x);
   background-size: cover;
   background-position: center;
   color: #fff;
