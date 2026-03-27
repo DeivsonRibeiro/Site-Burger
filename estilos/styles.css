@@ -31,8 +31,19 @@ body {
 }
 
 header {
+  /* Optimization: Replaced a 7.8MB JPG with a 233KB WebP and a 621KB compressed JPG fallback. */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_compressed.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    -webkit-image-set(
+      url("/imgs/imagem_header.webp") 1x,
+      url("/imgs/imagem_header_compressed.jpg") 1x
+    );
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    image-set(
+      url("/imgs/imagem_header.webp") 1x,
+      url("/imgs/imagem_header_compressed.jpg") 1x
+    );
   background-size: cover;
   background-position: center;
   color: #fff;
