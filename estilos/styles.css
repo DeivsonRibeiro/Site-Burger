@@ -31,8 +31,15 @@ body {
 }
 
 header {
+  /* Optimization: Reduced header image size from 7.8MB to ~621KB (JPG) and ~341KB (WebP) for faster loading. */
+  /* Fallback for older browsers */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_compressed.jpg");
+  /* Modern browsers supporting WebP */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    -webkit-image-set(url("/imgs/imagem_header.webp") 1x);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    image-set(url("/imgs/imagem_header.webp") 1x);
   background-size: cover;
   background-position: center;
   color: #fff;
