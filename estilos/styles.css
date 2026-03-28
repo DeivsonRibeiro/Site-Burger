@@ -31,8 +31,19 @@ body {
 }
 
 header {
+  /*
+    Bolt ⚡ Optimization:
+    - Original image size: 7.8MB
+    - Optimized WebP: 233KB
+    - Optimized JPG: 621KB
+    - Using WebP with JPG fallback for performance.
+  */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_optimized.jpg"); /* Fallback for older browsers */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    -webkit-image-set(url("/imgs/imagem_header.webp") type("image/webp"), url("/imgs/imagem_header_optimized.jpg") type("image/jpeg")); /* Safari */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    image-set(url("/imgs/imagem_header.webp") type("image/webp"), url("/imgs/imagem_header_optimized.jpg") type("image/jpeg")); /* Standard */
   background-size: cover;
   background-position: center;
   color: #fff;
