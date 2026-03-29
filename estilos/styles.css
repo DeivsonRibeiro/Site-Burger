@@ -32,7 +32,7 @@ body {
 
 header {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_optimized.jpg");
   background-size: cover;
   background-position: center;
   color: #fff;
@@ -1359,4 +1359,11 @@ h2 {
 
 .confirm-btn:hover {
   transform: scale(1.05);
+}
+
+@supports (background-image: url('/imgs/imagem_header.webp')) {
+  header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("/imgs/imagem_header.webp");
+  }
 }
