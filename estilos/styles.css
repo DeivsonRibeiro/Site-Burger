@@ -31,8 +31,17 @@ body {
 }
 
 header {
+  /* ⚡ Bolt: Optimized image loading.
+     - Fallback to a compressed JPG (621KB) from the original (7.8MB).
+     - Modern browsers will use the even smaller WebP format (233KB).
+  */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_optimized.jpg");
+
+  @supports (background-image: url("/imgs/imagem_header_optimized.webp")) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("/imgs/imagem_header_optimized.webp");
+  }
   background-size: cover;
   background-position: center;
   color: #fff;
