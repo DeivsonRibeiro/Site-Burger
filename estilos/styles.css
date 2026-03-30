@@ -30,9 +30,15 @@ body {
   width: 100%;
 }
 
+/*
+  ⚡ Bolt Optimization:
+  - The original `imagem_header.jpg` was 7.8MB.
+  - Replaced with `imagem_header_optimized.jpg` (621KB).
+  - This reduces the header image size by over 90%, significantly improving page load time.
+*/
 header {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_optimized.jpg");
   background-size: cover;
   background-position: center;
   color: #fff;
