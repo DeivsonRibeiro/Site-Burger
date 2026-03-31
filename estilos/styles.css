@@ -31,8 +31,12 @@ body {
 }
 
 header {
+  /* ⚡ Bolt: Optimized background image.
+     Replaced the original 7.8MB header image with a compressed 621KB JPG
+     to significantly improve page load speed.
+  */
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/imgs/imagem_header.jpg");
+    url("/imgs/imagem_header_optimized.jpg");
   background-size: cover;
   background-position: center;
   color: #fff;
